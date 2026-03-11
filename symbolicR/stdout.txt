@@ -1,0 +1,8 @@
+
+##############################################################
+#	file0.gen 10/03/2026 10:44:45    messages
+##############################################################
+    Old current.gen /usr/local/robotran/users/dehaene/upload/file0.gen loading
+Symbolic generation file : /usr/local/robotran/users/dehaene/upload/file0.gen
+Project: /usr/local/robotran/users/dehaene/upload/upload.mbs
+F1 - Recursive Direct Dynamics of tree-like MBS
