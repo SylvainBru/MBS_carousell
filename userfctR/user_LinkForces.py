@@ -33,7 +33,7 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
     # k = 1000 #N/m
     # Z0= 0.1  #m
     # Flink = k*(Z-Z0)
-
+    """
     spring1 = mbs_data.link_id['Spring1']
     spring2 = mbs_data.link_id['Spring2']
     spring3 = mbs_data.link_id['Spring3']
@@ -46,6 +46,6 @@ def user_LinkForces(Z, Zd, mbs_data, tsim, identity):
 
         Flink = K*(Z-L0) + D*Zd
 
-    #print(Flink)
+    #print(Flink)"""
 
     return Flink

@@ -78,21 +78,48 @@ def user_JointForces(mbs_data, tsim):
 
     mbs_data.Qq[joint_pole] = T
 
+    
 
+    # --- Constantes ---
+    # Amortissement de base des charnières (donné dans l'énoncé)
+    D_hinge_normal = 100.0  # [cite: 152]
+    D_hinge_rusted = 20000.0 # [cite: 152]
 
+    # Équivalents calculés pour le vérin (ressort-amortisseur)
+    D_rot_eq = 175.0  # Nm.s/rad
+    K_rot_eq = 125.0  # Nm/rad
 
-    D_normal = 100.0    # Ns/m — pendules 1, 3, 4
-    D_rusted = 20000.0  # Ns/m — pendule 2 (rouillé)
+    # Le ressort réel est étiré de ~8.5m à l'arrêt, créant un couple permanent
+    # Valeur calculée pour l'équilibre à 75°
+    T_precharge = -2145.0 # Nm 
 
+    # Angle initial en radians (75°)
+    q_init = 75.0 * np.pi / 180.0 # [cite: 175, 186]
+
+    # IDs des articulations (déjà définis dans ton code)
     hinge_pend1 = mbs_data.joint_id['arm_pend1']
     hinge_pend2 = mbs_data.joint_id['arm_pend2']
     hinge_pend3 = mbs_data.joint_id['arm_pend3']
     hinge_pend4 = mbs_data.joint_id['arm_pend4']
 
-    mbs_data.Qq[hinge_pend1] += -D_normal * mbs_data.qd[hinge_pend1]
-    mbs_data.Qq[hinge_pend2] += -D_rusted * mbs_data.qd[hinge_pend2]
-    mbs_data.Qq[hinge_pend3] += -D_normal * mbs_data.qd[hinge_pend3]
-    mbs_data.Qq[hinge_pend4] += -D_normal * mbs_data.qd[hinge_pend4]
+    hinges = [hinge_pend1, hinge_pend2, hinge_pend3, hinge_pend4]
+
+    for i, h_id in enumerate(hinges):
+        # 1. Sélection de l'amortissement de la charnière (spécifique au pendule 2)
+        d_hinge = D_hinge_normal #D_hinge_rusted if i == 1 else D_hinge_normal
+        
+        # 2. Calcul du couple total
+        # Terme 1 : Amortissement (Charnière + Équivalent vérin) * vitesse
+        # Terme 2 : Rappel élastique équivalent * écart à la position initiale
+        # Terme 3 : Le couple de précharge constant (très important !)
+        
+        torque_damping = -(d_hinge + D_rot_eq) * mbs_data.qd[h_id]
+        torque_stiffness = -K_rot_eq * (mbs_data.q[h_id] - q_init)
+
+        if(h_id in [hinge_pend2, hinge_pend4]): 
+            T_precharge = - T_precharge
+        
+        mbs_data.Qq[h_id] += torque_damping + torque_stiffness + T_precharge
 
 
 

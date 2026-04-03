@@ -210,23 +210,6 @@
         </graphics>
       </point>
       <point>
-        <pointname>srping1</pointname>
-        <coordinates>
-          <x>0.5</x>
-          <y>0.0</y>
-          <z>4.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>907.0</x>
-              <y>629.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
         <pointname>spring2</pointname>
         <coordinates>
           <x>0.0</x>
@@ -396,23 +379,6 @@
             <position>
               <x>1053.0</x>
               <y>813.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
-        <pointname>Point_0</pointname>
-        <coordinates>
-          <x>-0.1</x>
-          <y>0.0</y>
-          <z>-1.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>1042.0</x>
-              <y>727.0</y>
             </position>
           </x2D>
           <x3D />
@@ -1554,73 +1520,6 @@
       </graphics>
     </body>
   </bodytree>
-  <links>
-    <!--this is the link list-->
-    <link>
-      <name>Spring1</name>
-      <endpoint1>
-        <bodyname>Pole</bodyname>
-        <pointname>srping1</pointname>
-      </endpoint1>
-      <endpoint2>
-        <bodyname>Pendule1</bodyname>
-        <pointname>Point_0</pointname>
-      </endpoint2>
-      <graphics>
-        <x3D>
-          <shown />
-        </x3D>
-      </graphics>
-    </link>
-    <link>
-      <name>Spring2</name>
-      <endpoint1>
-        <bodyname>Pole</bodyname>
-        <pointname>spring2</pointname>
-      </endpoint1>
-      <endpoint2>
-        <bodyname>Pendule2</bodyname>
-        <pointname>Point_1</pointname>
-      </endpoint2>
-      <graphics>
-        <x3D>
-          <shown />
-        </x3D>
-      </graphics>
-    </link>
-    <link>
-      <name>Spring3</name>
-      <endpoint1>
-        <bodyname>Pole</bodyname>
-        <pointname>spring3</pointname>
-      </endpoint1>
-      <endpoint2>
-        <bodyname>Pendule3</bodyname>
-        <pointname>Point_1</pointname>
-      </endpoint2>
-      <graphics>
-        <x3D>
-          <shown />
-        </x3D>
-      </graphics>
-    </link>
-    <link>
-      <name>Spring4</name>
-      <endpoint1>
-        <bodyname>Pole</bodyname>
-        <pointname>spring4</pointname>
-      </endpoint1>
-      <endpoint2>
-        <bodyname>Pendule4</bodyname>
-        <pointname>Point_1</pointname>
-      </endpoint2>
-      <graphics>
-        <x3D>
-          <shown />
-        </x3D>
-      </graphics>
-    </link>
-  </links>
   <user_models>
     <!--this is the userModel list-->
     <user_model>
