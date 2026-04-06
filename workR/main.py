@@ -34,8 +34,10 @@ except:
                       "See: https://www.robotran.eu/download/how-to-install/"
                       )
 
+import neri
+
 # %%===========================================================================
-# Project loading
+# Project loading mbsdata
 # =============================================================================
 #mbs_data = Robotran.MbsData('../dataR/Merry_go_round.mbs')
 import os
@@ -43,21 +45,12 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 mbs_path = os.path.join(script_dir, '..', 'dataR', 'Merry_go_round.mbs')
 mbs_data = Robotran.MbsData(mbs_path)
 
-# %%===========================================================================
-# Partitionning
-# =============================================================================
-mbs_data.process = 1
-mbs_part = Robotran.MbsPart(mbs_data)
-mbs_part.set_options(rowperm=1, verbose=1)
-mbs_part.run()
+topology = neri.extract_topology_from_mbs(mbs_path)
 
-# %%===========================================================================
-# Direct Dynamics
-# =============================================================================
-mbs_data.process = 3
-mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=3, save2file=1)
-results = mbs_dirdyn.run()
+print(topology)
+
+
+
 
 # %%===========================================================================
 # Plotting results
@@ -66,21 +59,3 @@ try:
     import matplotlib.pyplot as plt
 except Exception:
     raise RuntimeError('Unable to load matplotlib, plotting results unavailable.')
-
-# Figure creation
-fig = plt.figure(num='Example of plot')
-axis = fig.gca()
-
-joint_pole = mbs_data.joint_id['Pole3']
-
-# Plotting data's
-#axis.plot(results.q[:, 0], results.q[:, 1], label='q[1]')
-axis.plot(results.qd[:, 0], np.rad2deg(results.qd[:, joint_pole]), label='Main pole angular velocity')
-
-# Figure enhancement
-axis.grid(True)
-axis.set_xlim(left=mbs_dirdyn.get_options('t0'), right=mbs_dirdyn.get_options('tf'))
-axis.set_xlabel('Time (s)')
-axis.set_ylabel('Coordinate value (m or rad)')
-
-plt.show()
