@@ -139,7 +139,7 @@ def rotation_matrix(axis, angle):
 ####             NERi Formalism                 ######
 ######################################################
 
-def forward_kinematics(q, qd, qdd, topology, mbs_data: Robotran.MbsData): 
+def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData): 
     """
         Etape 1: Parcourt l'arbre de la base vers les feuilles
         Calcule les vitesses et accélérations dans chaque corps. 
@@ -167,7 +167,7 @@ def forward_kinematics(q, qd, qdd, topology, mbs_data: Robotran.MbsData):
     R[:, :, 0]    = np.eye(3)
 
     for i in range(N_body):  #Boucle sur tout les corps/joints
-        h_id =  inbody(i)  #Prend l'indice du corps parents
+        h =  inbody(i)  #Prend l'indice du corps parents
         R[:, :, i] = rotation_matrix(phi[:, i], q[i]).T 
         R_ih = R[:, :, i]
         
@@ -189,14 +189,21 @@ def forward_kinematics(q, qd, qdd, topology, mbs_data: Robotran.MbsData):
         terme_parent_alpha = alpha_c[:, h] + beta_c[:, :, h] @ d_hi[:, i]
         alpha_c[:, i] = R_ih @ terme_parent_alpha + 2.0 * tilde(omega[:, i]) @ (psi_i * qd[i])
 
+        # --- TIROIR "M" : Préparation de la matrice de masse ---
+        for k in range(1, i + 1):
+            delta_ki = 0.0
+            if (k == i): 
+                delta_ki = 1.0
+            
+            # Impact de l'articulation k sur l'accélération angulaire de i (Eq 3.62)
+            O_M[:, i, k] = R_ih @ O_M[:, h, k] + delta_ki * phi_i
+            
+            # Impact de l'articulation k sur l'accélération linéaire de i (Eq 3.64)
+            terme_parent_A = A_M[:, h, k] + tilde(O_M[:, h, k]) @ d_hi[:, i]
+            A_M[:, i, k] = R_ih @ terme_parent_A + delta_ki * psi_i
 
-
-
-
-
-
-    
-    return omega, omega_d, alpha
+    # On renvoie tous les tableaux calculés qui serviront pour l'étape 2
+    return omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R
 
 
 def backward_dynamics(q, qd, qdd, mbs_data, omega, omega_d, alpha): 
