@@ -7,98 +7,43 @@ import xml.etree.ElementTree as ET
 ####              Extracte topology             ######
 ######################################################
 
-def extract_topology_from_mbs(filepath):
+
+def define_topology():
     """
-    Lit un fichier .mbs de Robotran et extrait automatiquement
-    les matrices topologiques nécessaires au formalisme NER.
+    Definition de la topologie sur base du pad robotran nécessaires au formalisme NER (inbody, phi(joint rotation), psy (joint translation), d_hi, masse, l_ci, Inertie).
+    Les vecteurs sont structurés pour un accès via var[i] = [x, y, z].
+    L'index est le corps (fictif ou non associé au valeur)
+    Le premier corps est la base (index 0) (Pas de parent)
     """
-    # Chargement et parsing du fichier XML
-    tree = ET.parse(filepath)
-    root = tree.getroot()
-    
-    # -------------------------------------------------------------
-    # INITIALISATION (Pour la base du système = index 0)
-    # -------------------------------------------------------------
-    # Dictionnaire pour retrouver l'index (0, 1, 2...) d'un corps à partir de son nom
-    body_indices = {'base': 0}
-    
-    # Dictionnaire pour stocker les coordonnées [x, y, z] des points d'ancrage.
-    # Clé : (nom_du_corps, nom_du_point)
-    points_ancrage = {('base', 'origin'): [0.0, 0.0, 0.0]}
-    
-    # Listes qui deviendront nos tableaux numpy à la fin
-    inbody_list = [0]
-    phi_list    = [[0.0, 0.0, 0.0]]
-    psi_list    = [[0.0, 0.0, 0.0]]
-    d_hi_list   = [[0.0, 0.0, 0.0]]
-    
-    # -------------------------------------------------------------
-    # LECTURE DE L'ARBRE DES CORPS
-    # -------------------------------------------------------------
-    bodytree = root.find('bodytree')
-    if bodytree is None:
-        raise ValueError("Erreur : Balise <bodytree> introuvable dans le fichier MBS.")
-        
-    # On parcourt chaque balise <body>. 'enumerate(..., start=1)' assigne l'index i (1, 2, 3...)
-    for i, body in enumerate(bodytree.findall('body'), start=1):
-        
-        # 1. Nom et indexation du corps
-        bodyname = body.find('bodyname').text
-        body_indices[bodyname] = i
-        
-        # Par défaut, chaque corps possède une "origin" en [0, 0, 0] dans son repère local
-        points_ancrage[(bodyname, 'origin')] = [0.0, 0.0, 0.0]
-        
-        # 2. Sauvegarde des points d'ancrage spécifiques du corps (ex: "Lp")
-        for pt in body.findall('point'):
-            pt_name = pt.find('pointname').text
-            coords = pt.find('coordinates')
-            x = float(coords.find('x').text)
-            y = float(coords.find('y').text)
-            z = float(coords.find('z').text)
-            points_ancrage[(bodyname, pt_name)] = [x, y, z]
-            
-        # 3. Lien de parenté (pour 'inbody' et 'd_hi')
-        parent = body.find('parent')
-        parent_name = parent.find('bodyname').text
-        parent_point = parent.find('pointname').text
-        
-        # On ajoute l'index du parent
-        inbody_list.append(body_indices[parent_name])
-        # On va chercher où ce point parent était situé pour avoir le vecteur d_hi
-        d_hi_list.append(points_ancrage[(parent_name, parent_point)])
-        
-        # 4. Axes de l'articulation (pour 'phi' et 'psi')
-        joint = body.find('joint')
-        jtype = joint.find('type').text
-        
-        phi = [0.0, 0.0, 0.0]
-        psi = [0.0, 0.0, 0.0]
-        
-        # Décodage de la nomenclature classique Robotran
-        if jtype == 'T1':   psi = [1.0, 0.0, 0.0]
-        elif jtype == 'T2': psi = [0.0, 1.0, 0.0]
-        elif jtype == 'T3': psi = [0.0, 0.0, 1.0]
-        elif jtype == 'R1': phi = [1.0, 0.0, 0.0]
-        elif jtype == 'R2': phi = [0.0, 1.0, 0.0]
-        elif jtype == 'R3': phi = [0.0, 0.0, 1.0]
-        else:
-            print(f"Attention: Type d'articulation '{jtype}' non géré pour {bodyname}.")
-            
-        phi_list.append(phi)
-        psi_list.append(psi)
-        
-    # -------------------------------------------------------------
-    # FORMATAGE FINAL (Conversion en tableaux Numpy)
-    # -------------------------------------------------------------
-    topologie = {
-        "inbody": np.array(inbody_list),
-        "phi":    np.array(phi_list).T,  # JE VIENS DE LE RETIRER .T pour transposer et avoir la taille (3, n+1)
-        "psi":    np.array(psi_list).T,
-        "d_hi":   np.array(d_hi_list).T
+    inbody_name_list = ["base", "R3_Pole", "R1_Pole", "R2_Pole", "R2_arm_pend1", "R2_cardan1a", "R1_cardan1", "R2_arm_pend2", "T1_effort_normal", "T3_effort_tranchant", "R2_effort_flechissant"    ]
+    inbody_list = np.array([None, 0, 1, 2, 3, 4, 5, 3,  ])
+    phi_list    = np.array([None, 
+                           [],
+                           ])
+    psi_list    = np.array([None, 
+                         ])
+    d_hi_list   = np.array([None,
+                          ])
+    z_list      = np.array([None,
+                       ])
+
+
+
+
+
+    topology = {
+        # Topologie
+        "inbody": np.array(inbody_list),             # Taille: (n+1,)
+        "phi":    np.array(phi_list),                # Taille: (n+1, 3) --> phi[i] = [x,y,z]
+        "psi":    np.array(psi_list),                # Taille: (n+1, 3) --> psi[i] = [x,y,z]
+        "d_hi":   np.array(d_hi_list),               # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
+        # Dynamique
+        "m":      np.array(m_list),                  # Taille: (n+1,)     --> m[i] = scalaire
+        "l_ci":   np.array(l_ci_list),               # Taille: (n+1, 3) --> l_ci[i] = [x,y,z]
+        "I":      np.array(I_list)                   # Taille: (n+1, 3, 3)--> I[i] = matrice 3x3
     }
     
-    return topologie
+    return topology
 
 
 ######################################################
@@ -127,11 +72,17 @@ def rotation_matrix(axis, angle):
     s = np.sin(angle)
     
     if axis[0] == 1.0:   # Autour de X
-        return np.array([[1, 0, 0], [0, c, -s], [0, s, c]])
+        return np.array([[1, 0, 0], 
+                         [0, c, -s], 
+                         [0, s, c]])
     elif axis[1] == 1.0: # Autour de Y
-        return np.array([[c, 0, s], [0, 1, 0], [-s, 0, c]])
+        return np.array([[c, 0, s], 
+                         [0, 1, 0], 
+                         [-s, 0, c]])
     elif axis[2] == 1.0: # Autour de Z
-        return np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
+        return np.array([[c, -s, 0], 
+                         [s, c, 0], 
+                         [0, 0, 1]])
     else:
         return np.eye(3)
 
@@ -153,56 +104,20 @@ def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData):
     d_hi   = topology["d_hi"]
 
     #Allocations mémoires (taille n+1 pour inclure la base à l'index 0)
-    omega       = np.zeros((3, N_body + 1))
-    omega_c_dot = np.zeros((3, N_body + 1))
-    alpha_c     = np.zeros((3, N_body + 1))
-    beta_c      = np.zeros((3, 3, N_body + 1))
-    R           = np.zeros((3, 3, N_body + 1)) # Matrices de rotation R^{i,h}
+    omega       = np.zeros((N_body + 1, 3))
+    omega_c_dot = np.zeros((N_body + 1, 3))
+    alpha_c     = np.zeros((N_body + 1, 3))
+    beta_c      = np.zeros((N_body + 1, 3))
+    R           = np.zeros((N_body + 1, 3, 3)) # Matrices de rotation R^{i,h}
 
-    O_M = np.zeros((3, N_body + 1, N_body + 1))
-    A_M = np.zeros((3, N_body + 1, N_body + 1))
+    O_M = np.zeros((N_body + 1, N_body + 1, 3))
+    A_M = np.zeros((N_body + 1, N_body + 1, 3))
 
-    #Condition initiale 
-    alpha_c[:, 0] = -mbs_data.g[1:4]  
-    R[:, :, 0]    = np.eye(3)
+    for i in range(1, N_body): 
+        h = inbody[i]
 
-    for i in range(N_body):  #Boucle sur tout les corps/joints
-        h =  inbody(i)  #Prend l'indice du corps parents
-        R[:, :, i] = rotation_matrix(phi[:, i], q[i]).T 
-        R_ih = R[:, :, i]
-        
-        phi_i = phi[:, i]
-        psi_i = psi[:, i]
-        
-        # --- TIROIR "c" : Termes liés aux vitesses et à la gravité ---
-        
-        # Vitesse angulaire (Eq 3.58)
-        omega[:, i] = R_ih @ omega[:, h] + phi_i * qd[i]
-        
-        # Accélération angulaire sans les qdd (Eq 3.59)
-        omega_c_dot[:, i] = R_ih @ omega_c_dot[:, h] + tilde(omega[:, i]) @ (phi_i * qd[i])
-        
-        # Terme quadratique (Eq 3.60)
-        beta_c[:, :, i] = tilde(omega_c_dot[:, i]) + tilde(omega[:, i]) @ tilde(omega[:, i])
-        
-        # Accélération linéaire sans les qdd (Eq 3.61)
-        terme_parent_alpha = alpha_c[:, h] + beta_c[:, :, h] @ d_hi[:, i]
-        alpha_c[:, i] = R_ih @ terme_parent_alpha + 2.0 * tilde(omega[:, i]) @ (psi_i * qd[i])
 
-        # --- TIROIR "M" : Préparation de la matrice de masse ---
-        for k in range(1, i + 1):
-            delta_ki = 0.0
-            if (k == i): 
-                delta_ki = 1.0
-            
-            # Impact de l'articulation k sur l'accélération angulaire de i (Eq 3.62)
-            O_M[:, i, k] = R_ih @ O_M[:, h, k] + delta_ki * phi_i
-            
-            # Impact de l'articulation k sur l'accélération linéaire de i (Eq 3.64)
-            terme_parent_A = A_M[:, h, k] + tilde(O_M[:, h, k]) @ d_hi[:, i]
-            A_M[:, i, k] = R_ih @ terme_parent_A + delta_ki * psi_i
 
-    # On renvoie tous les tableaux calculés qui serviront pour l'étape 2
     return omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R
 
 
@@ -212,6 +127,7 @@ def backward_dynamics(q, qd, qdd, mbs_data, omega, omega_d, alpha):
     Calcule les forces et couples aux articulations, et projette pour obtenir Q. 
     
     """
+    Q = 0.0
     return Q
 
 def  ner_generique(q, qd, qdd, mbs_data): 

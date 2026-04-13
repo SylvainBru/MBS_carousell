@@ -10,12 +10,12 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Fri Apr  3 10:29:32 2026
+#	==> Generation Date: Tue Apr  7 15:28:19 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Merry_go_round
 #
-#	==> Number of joints: 15
+#	==> Number of joints: 19
 #
 #	==> Function: F2 - Recursive Inverse Dynamics of tree-like MBS
 #
@@ -45,12 +45,6 @@ def invdyna(phi,s,tsim):
     C5 = cos(q[5])
     S6 = sin(q[6])
     C6 = cos(q[6])
-    S7 = sin(q[7])
-    C7 = cos(q[7])
-    S8 = sin(q[8])
-    C8 = cos(q[8])
-    S9 = sin(q[9])
-    C9 = cos(q[9])
     S10 = sin(q[10])
     C10 = cos(q[10])
     S11 = sin(q[11])
@@ -63,6 +57,14 @@ def invdyna(phi,s,tsim):
     C14 = cos(q[14])
     S15 = sin(q[15])
     C15 = cos(q[15])
+    S16 = sin(q[16])
+    C16 = cos(q[16])
+    S17 = sin(q[17])
+    C17 = cos(q[17])
+    S18 = sin(q[18])
+    C18 = cos(q[18])
+    S19 = sin(q[19])
+    C19 = cos(q[19])
  
 # Augmented Joint Position Vectors
 
@@ -115,9 +117,9 @@ def invdyna(phi,s,tsim):
     OMp15 = C5*(OMp14-qd[5]*OM34)-S5*(OMp34+qd[5]*OM14)
     OMp25 = qdd[5]+OMp24
     OMp35 = C5*(OMp34+qd[5]*OM14)+S5*(OMp14-qd[5]*OM34)
-    ALPHA15 = C5*(ALPHA14+BETA34*s.dpt[3,8])-S5*(ALPHA34+BS94*s.dpt[3,8])
-    ALPHA25 = ALPHA24+BETA64*s.dpt[3,8]
-    ALPHA35 = C5*(ALPHA34+BS94*s.dpt[3,8])+S5*(ALPHA14+BETA34*s.dpt[3,8])
+    ALPHA15 = C5*(ALPHA14+BETA34*s.dpt[3,5])-S5*(ALPHA34+BS94*s.dpt[3,5])
+    ALPHA25 = ALPHA24+BETA64*s.dpt[3,5]
+    ALPHA35 = C5*(ALPHA34+BS94*s.dpt[3,5])+S5*(ALPHA14+BETA34*s.dpt[3,5])
     OM16 = qd[6]+OM15
     OM26 = OM25*C6+OM35*S6
     OM36 = -OM25*S6+OM35*C6
@@ -131,180 +133,232 @@ def invdyna(phi,s,tsim):
     BETA66 = BS66-OMp16
     ALPHA26 = ALPHA25*C6+ALPHA35*S6
     ALPHA36 = -ALPHA25*S6+ALPHA35*C6
-    OM17 = qd[7]+OM13
-    OM27 = OM23*C7+OM33*S7
-    OM37 = -OM23*S7+OM33*C7
-    OMp17 = qdd[7]+OMp13
-    OMp27 = C7*(OMp23+qd[7]*OM33)+S7*(OMp33-qd[7]*OM23)
-    OMp37 = C7*(OMp33-qd[7]*OM23)-S7*(OMp23+qd[7]*OM33)
-    BS37 = OM17*OM37
-    BS67 = OM27*OM37
-    BS97 = -OM17*OM17-OM27*OM27
-    BETA37 = BS37+OMp27
-    BETA67 = BS67-OMp17
-    ALPHA17 = ALPHA13+BETA23*s.dpt[2,2]+BETA33*s.dpt[3,2]
-    ALPHA27 = C7*(ALPHA22+BETA63*s.dpt[3,2]+BS53*s.dpt[2,2])+S7*(ALPHA33+BETA83*s.dpt[2,2]+BS93*s.dpt[3,2])
-    ALPHA37 = C7*(ALPHA33+BETA83*s.dpt[2,2]+BS93*s.dpt[3,2])-S7*(ALPHA22+BETA63*s.dpt[3,2]+BS53*s.dpt[2,2])
-    OM18 = qd[8]+OM17
-    OM28 = OM27*C8+OM37*S8
-    OM38 = -OM27*S8+OM37*C8
-    OMp18 = qdd[8]+OMp17
-    OMp28 = C8*(OMp27+qd[8]*OM37)+S8*(OMp37-qd[8]*OM27)
-    OMp38 = C8*(OMp37-qd[8]*OM27)-S8*(OMp27+qd[8]*OM37)
-    ALPHA18 = ALPHA17+BETA37*s.dpt[3,10]
-    ALPHA28 = C8*(ALPHA27+BETA67*s.dpt[3,10])+S8*(ALPHA37+BS97*s.dpt[3,10])
-    ALPHA38 = C8*(ALPHA37+BS97*s.dpt[3,10])-S8*(ALPHA27+BETA67*s.dpt[3,10])
-    OM19 = OM18*C9-OM38*S9
-    OM29 = qd[9]+OM28
-    OM39 = OM18*S9+OM38*C9
-    OMp19 = C9*(OMp18-qd[9]*OM38)-S9*(OMp38+qd[9]*OM18)
-    OMp29 = qdd[9]+OMp28
-    OMp39 = C9*(OMp38+qd[9]*OM18)+S9*(OMp18-qd[9]*OM38)
-    BS39 = OM19*OM39
-    BS69 = OM29*OM39
-    BS99 = -OM19*OM19-OM29*OM29
-    BETA39 = BS39+OMp29
-    BETA69 = BS69-OMp19
-    ALPHA19 = ALPHA18*C9-ALPHA38*S9
-    ALPHA39 = ALPHA18*S9+ALPHA38*C9
+    BS17 = -OM23*OM23-OM33*OM33
+    BS27 = OM13*OM23
+    BS37 = OM13*OM33
+    BS57 = -OM13*OM13-OM33*OM33
+    BS67 = OM23*OM33
+    BETA27 = BS27-OMp33
+    BETA47 = BS27+OMp33
+    BETA77 = BS37-OMp23
+    BETA87 = BS67+OMp13
+    ALPHA17 = qdd[7]+ALPHA13+q[7]*BS13+BETA33*s.dpt[3,2]
+    ALPHA27 = ALPHA22+q[7]*BETA43+(2.0)*qd[7]*OM33+BETA63*s.dpt[3,2]
+    ALPHA37 = ALPHA33+q[7]*BETA73-(2.0)*qd[7]*OM23+BS93*s.dpt[3,2]
+    BS38 = OM13*OM33
+    BS68 = OM23*OM33
+    BS98 = -OM13*OM13-OM23*OM23
+    BETA38 = BS38+OMp23
+    BETA68 = BS68-OMp13
+    ALPHA18 = qdd[8]+ALPHA17+q[8]*BS17+BETA27*s.dpt[2,7]
+    ALPHA28 = ALPHA27+q[8]*BETA47+(2.0)*qd[8]*OM33+BS57*s.dpt[2,7]
+    ALPHA38 = ALPHA37+q[8]*BETA77-(2.0)*qd[8]*OM23+BETA87*s.dpt[2,7]
+    ALPHA19 = ALPHA18+q[9]*BETA38+(2.0)*qd[9]*OM23
+    ALPHA29 = ALPHA28+q[9]*BETA68-(2.0)*qd[9]*OM13
+    ALPHA39 = qdd[9]+ALPHA38+q[9]*BS98
     OM110 = OM13*C10-OM33*S10
     OM210 = qd[10]+OM23
     OM310 = OM13*S10+OM33*C10
     OMp110 = C10*(OMp13-qd[10]*OM33)-S10*(OMp33+qd[10]*OM13)
     OMp210 = qdd[10]+OMp23
     OMp310 = C10*(OMp33+qd[10]*OM13)+S10*(OMp13-qd[10]*OM33)
-    BS310 = OM110*OM310
-    BS610 = OM210*OM310
-    BS910 = -OM110*OM110-OM210*OM210
-    BETA310 = BS310+OMp210
-    BETA610 = BS610-OMp110
-    ALPHA110 = C10*(ALPHA13+BETA33*s.dpt[3,3]+BS13*s.dpt[1,3])-S10*(ALPHA33+BETA73*s.dpt[1,3]+BS93*s.dpt[3,3])
-    ALPHA210 = ALPHA22+BETA43*s.dpt[1,3]+BETA63*s.dpt[3,3]
-    ALPHA310 = C10*(ALPHA33+BETA73*s.dpt[1,3]+BS93*s.dpt[3,3])+S10*(ALPHA13+BETA33*s.dpt[3,3]+BS13*s.dpt[1,3])
-    OM111 = OM110*C11-OM310*S11
-    OM211 = qd[11]+OM210
-    OM311 = OM110*S11+OM310*C11
-    OMp111 = C11*(OMp110-qd[11]*OM310)-S11*(OMp310+qd[11]*OM110)
-    OMp211 = qdd[11]+OMp210
-    OMp311 = C11*(OMp310+qd[11]*OM110)+S11*(OMp110-qd[11]*OM310)
-    ALPHA111 = C11*(ALPHA110+BETA310*s.dpt[3,13])-S11*(ALPHA310+BS910*s.dpt[3,13])
-    ALPHA211 = ALPHA210+BETA610*s.dpt[3,13]
-    ALPHA311 = C11*(ALPHA310+BS910*s.dpt[3,13])+S11*(ALPHA110+BETA310*s.dpt[3,13])
+    ALPHA110 = ALPHA19*C10-ALPHA39*S10
+    ALPHA310 = ALPHA19*S10+ALPHA39*C10
+    OM111 = qd[11]+OM110
+    OM211 = OM210*C11+OM310*S11
+    OM311 = -OM210*S11+OM310*C11
+    OMp111 = qdd[11]+OMp110
+    OMp211 = C11*(OMp210+qd[11]*OM310)+S11*(OMp310-qd[11]*OM210)
+    OMp311 = C11*(OMp310-qd[11]*OM210)-S11*(OMp210+qd[11]*OM310)
+    BS311 = OM111*OM311
+    BS611 = OM211*OM311
+    BS911 = -OM111*OM111-OM211*OM211
+    BETA311 = BS311+OMp211
+    BETA611 = BS611-OMp111
+    ALPHA211 = ALPHA29*C11+ALPHA310*S11
+    ALPHA311 = -ALPHA29*S11+ALPHA310*C11
     OM112 = qd[12]+OM111
     OM212 = OM211*C12+OM311*S12
     OM312 = -OM211*S12+OM311*C12
     OMp112 = qdd[12]+OMp111
     OMp212 = C12*(OMp211+qd[12]*OM311)+S12*(OMp311-qd[12]*OM211)
     OMp312 = C12*(OMp311-qd[12]*OM211)-S12*(OMp211+qd[12]*OM311)
-    BS312 = OM112*OM312
-    BS612 = OM212*OM312
-    BS912 = -OM112*OM112-OM212*OM212
-    BETA312 = BS312+OMp212
-    BETA612 = BS612-OMp112
-    ALPHA212 = ALPHA211*C12+ALPHA311*S12
-    ALPHA312 = -ALPHA211*S12+ALPHA311*C12
-    OM113 = qd[13]+OM13
-    OM213 = OM23*C13+OM33*S13
-    OM313 = -OM23*S13+OM33*C13
-    OMp113 = qdd[13]+OMp13
-    OMp213 = C13*(OMp23+qd[13]*OM33)+S13*(OMp33-qd[13]*OM23)
-    OMp313 = C13*(OMp33-qd[13]*OM23)-S13*(OMp23+qd[13]*OM33)
+    ALPHA112 = ALPHA110+BETA311*s.dpt[3,9]
+    ALPHA212 = C12*(ALPHA211+BETA611*s.dpt[3,9])+S12*(ALPHA311+BS911*s.dpt[3,9])
+    ALPHA312 = C12*(ALPHA311+BS911*s.dpt[3,9])-S12*(ALPHA211+BETA611*s.dpt[3,9])
+    OM113 = OM112*C13-OM312*S13
+    OM213 = qd[13]+OM212
+    OM313 = OM112*S13+OM312*C13
+    OMp113 = C13*(OMp112-qd[13]*OM312)-S13*(OMp312+qd[13]*OM112)
+    OMp213 = qdd[13]+OMp212
+    OMp313 = C13*(OMp312+qd[13]*OM112)+S13*(OMp112-qd[13]*OM312)
     BS313 = OM113*OM313
     BS613 = OM213*OM313
     BS913 = -OM113*OM113-OM213*OM213
     BETA313 = BS313+OMp213
     BETA613 = BS613-OMp113
-    ALPHA113 = ALPHA13+BETA23*s.dpt[2,4]+BETA33*s.dpt[3,4]
-    ALPHA213 = C13*(ALPHA22+BETA63*s.dpt[3,4]+BS53*s.dpt[2,4])+S13*(ALPHA33+BETA83*s.dpt[2,4]+BS93*s.dpt[3,4])
-    ALPHA313 = C13*(ALPHA33+BETA83*s.dpt[2,4]+BS93*s.dpt[3,4])-S13*(ALPHA22+BETA63*s.dpt[3,4]+BS53*s.dpt[2,4])
-    OM114 = qd[14]+OM113
-    OM214 = OM213*C14+OM313*S14
-    OM314 = -OM213*S14+OM313*C14
-    OMp114 = qdd[14]+OMp113
-    OMp214 = C14*(OMp213+qd[14]*OM313)+S14*(OMp313-qd[14]*OM213)
-    OMp314 = C14*(OMp313-qd[14]*OM213)-S14*(OMp213+qd[14]*OM313)
-    ALPHA114 = ALPHA113+BETA313*s.dpt[3,16]
-    ALPHA214 = C14*(ALPHA213+BETA613*s.dpt[3,16])+S14*(ALPHA313+BS913*s.dpt[3,16])
-    ALPHA314 = C14*(ALPHA313+BS913*s.dpt[3,16])-S14*(ALPHA213+BETA613*s.dpt[3,16])
+    ALPHA113 = ALPHA112*C13-ALPHA312*S13
+    ALPHA313 = ALPHA112*S13+ALPHA312*C13
+    OM114 = OM13*C14-OM33*S14
+    OM214 = qd[14]+OM23
+    OM314 = OM13*S14+OM33*C14
+    OMp114 = C14*(OMp13-qd[14]*OM33)-S14*(OMp33+qd[14]*OM13)
+    OMp214 = qdd[14]+OMp23
+    OMp314 = C14*(OMp33+qd[14]*OM13)+S14*(OMp13-qd[14]*OM33)
+    BS314 = OM114*OM314
+    BS614 = OM214*OM314
+    BS914 = -OM114*OM114-OM214*OM214
+    BETA314 = BS314+OMp214
+    BETA614 = BS614-OMp114
+    ALPHA114 = C14*(ALPHA13+BETA33*s.dpt[3,3]+BS13*s.dpt[1,3])-S14*(ALPHA33+BETA73*s.dpt[1,3]+BS93*s.dpt[3,3])
+    ALPHA214 = ALPHA22+BETA43*s.dpt[1,3]+BETA63*s.dpt[3,3]
+    ALPHA314 = C14*(ALPHA33+BETA73*s.dpt[1,3]+BS93*s.dpt[3,3])+S14*(ALPHA13+BETA33*s.dpt[3,3]+BS13*s.dpt[1,3])
     OM115 = OM114*C15-OM314*S15
     OM215 = qd[15]+OM214
     OM315 = OM114*S15+OM314*C15
     OMp115 = C15*(OMp114-qd[15]*OM314)-S15*(OMp314+qd[15]*OM114)
     OMp215 = qdd[15]+OMp214
     OMp315 = C15*(OMp314+qd[15]*OM114)+S15*(OMp114-qd[15]*OM314)
-    BS315 = OM115*OM315
-    BS615 = OM215*OM315
-    BS915 = -OM115*OM115-OM215*OM215
-    BETA315 = BS315+OMp215
-    BETA615 = BS615-OMp115
-    ALPHA115 = ALPHA114*C15-ALPHA314*S15
-    ALPHA315 = ALPHA114*S15+ALPHA314*C15
+    ALPHA115 = C15*(ALPHA114+BETA314*s.dpt[3,11])-S15*(ALPHA314+BS914*s.dpt[3,11])
+    ALPHA215 = ALPHA214+BETA614*s.dpt[3,11]
+    ALPHA315 = C15*(ALPHA314+BS914*s.dpt[3,11])+S15*(ALPHA114+BETA314*s.dpt[3,11])
+    OM116 = qd[16]+OM115
+    OM216 = OM215*C16+OM315*S16
+    OM316 = -OM215*S16+OM315*C16
+    OMp116 = qdd[16]+OMp115
+    OMp216 = C16*(OMp215+qd[16]*OM315)+S16*(OMp315-qd[16]*OM215)
+    OMp316 = C16*(OMp315-qd[16]*OM215)-S16*(OMp215+qd[16]*OM315)
+    BS316 = OM116*OM316
+    BS616 = OM216*OM316
+    BS916 = -OM116*OM116-OM216*OM216
+    BETA316 = BS316+OMp216
+    BETA616 = BS616-OMp116
+    ALPHA216 = ALPHA215*C16+ALPHA315*S16
+    ALPHA316 = -ALPHA215*S16+ALPHA315*C16
+    OM117 = qd[17]+OM13
+    OM217 = OM23*C17+OM33*S17
+    OM317 = -OM23*S17+OM33*C17
+    OMp117 = qdd[17]+OMp13
+    OMp217 = C17*(OMp23+qd[17]*OM33)+S17*(OMp33-qd[17]*OM23)
+    OMp317 = C17*(OMp33-qd[17]*OM23)-S17*(OMp23+qd[17]*OM33)
+    BS317 = OM117*OM317
+    BS617 = OM217*OM317
+    BS917 = -OM117*OM117-OM217*OM217
+    BETA317 = BS317+OMp217
+    BETA617 = BS617-OMp117
+    ALPHA117 = ALPHA13+BETA23*s.dpt[2,4]+BETA33*s.dpt[3,4]
+    ALPHA217 = C17*(ALPHA22+BETA63*s.dpt[3,4]+BS53*s.dpt[2,4])+S17*(ALPHA33+BETA83*s.dpt[2,4]+BS93*s.dpt[3,4])
+    ALPHA317 = C17*(ALPHA33+BETA83*s.dpt[2,4]+BS93*s.dpt[3,4])-S17*(ALPHA22+BETA63*s.dpt[3,4]+BS53*s.dpt[2,4])
+    OM118 = qd[18]+OM117
+    OM218 = OM217*C18+OM317*S18
+    OM318 = -OM217*S18+OM317*C18
+    OMp118 = qdd[18]+OMp117
+    OMp218 = C18*(OMp217+qd[18]*OM317)+S18*(OMp317-qd[18]*OM217)
+    OMp318 = C18*(OMp317-qd[18]*OM217)-S18*(OMp217+qd[18]*OM317)
+    ALPHA118 = ALPHA117+BETA317*s.dpt[3,13]
+    ALPHA218 = C18*(ALPHA217+BETA617*s.dpt[3,13])+S18*(ALPHA317+BS917*s.dpt[3,13])
+    ALPHA318 = C18*(ALPHA317+BS917*s.dpt[3,13])-S18*(ALPHA217+BETA617*s.dpt[3,13])
+    OM119 = OM118*C19-OM318*S19
+    OM219 = qd[19]+OM218
+    OM319 = OM118*S19+OM318*C19
+    OMp119 = C19*(OMp118-qd[19]*OM318)-S19*(OMp318+qd[19]*OM118)
+    OMp219 = qdd[19]+OMp218
+    OMp319 = C19*(OMp318+qd[19]*OM118)+S19*(OMp118-qd[19]*OM318)
+    BS319 = OM119*OM319
+    BS619 = OM219*OM319
+    BS919 = -OM119*OM119-OM219*OM219
+    BETA319 = BS319+OMp219
+    BETA619 = BS619-OMp119
+    ALPHA119 = ALPHA118*C19-ALPHA318*S19
+    ALPHA319 = ALPHA118*S19+ALPHA318*C19
  
 # Backward Dynamics
 
-    Fs115 = -s.frc[1,15]+s.m[15]*(ALPHA115+BETA315*s.l[3,15])
-    Fs215 = -s.frc[2,15]+s.m[15]*(ALPHA214+BETA615*s.l[3,15])
-    Fs315 = -s.frc[3,15]+s.m[15]*(ALPHA315+BS915*s.l[3,15])
-    Cq115 = -s.trq[1,15]+s.In[1,15]*OMp115-s.In[5,15]*OM215*OM315+s.In[9,15]*OM215*OM315-Fs215*s.l[3,15]
-    Cq215 = -s.trq[2,15]+s.In[1,15]*OM115*OM315+s.In[5,15]*OMp215-s.In[9,15]*OM115*OM315+Fs115*s.l[3,15]
-    Cq315 = -s.trq[3,15]-s.In[1,15]*OM115*OM215+s.In[5,15]*OM115*OM215+s.In[9,15]*OMp315
-    Fq114 = Fs115*C15+Fs315*S15
-    Fq314 = -Fs115*S15+Fs315*C15
-    Cq114 = Cq115*C15+Cq315*S15
-    Cq314 = -Cq115*S15+Cq315*C15
+    Fs119 = -s.frc[1,19]+s.m[19]*(ALPHA119+BETA319*s.l[3,19])
+    Fs219 = -s.frc[2,19]+s.m[19]*(ALPHA218+BETA619*s.l[3,19])
+    Fs319 = -s.frc[3,19]+s.m[19]*(ALPHA319+BS919*s.l[3,19])
+    Cq119 = -s.trq[1,19]+s.In[1,19]*OMp119-s.In[5,19]*OM219*OM319+s.In[9,19]*OM219*OM319-Fs219*s.l[3,19]
+    Cq219 = -s.trq[2,19]+s.In[1,19]*OM119*OM319+s.In[5,19]*OMp219-s.In[9,19]*OM119*OM319+Fs119*s.l[3,19]
+    Cq319 = -s.trq[3,19]-s.In[1,19]*OM119*OM219+s.In[5,19]*OM119*OM219+s.In[9,19]*OMp319
+    Fq118 = Fs119*C19+Fs319*S19
+    Fq318 = -Fs119*S19+Fs319*C19
+    Cq118 = Cq119*C19+Cq319*S19
+    Cq318 = -Cq119*S19+Cq319*C19
+    Fs117 = -s.frc[1,17]+s.m[17]*(ALPHA117+BETA317*s.l[3,17])
+    Fs217 = -s.frc[2,17]+s.m[17]*(ALPHA217+BETA617*s.l[3,17])
+    Fs317 = -s.frc[3,17]+s.m[17]*(ALPHA317+BS917*s.l[3,17])
+    Fq117 = Fq118+Fs117
+    Fq217 = Fs217-Fq318*S18+Fs219*C18
+    Fq317 = Fs317+Fq318*C18+Fs219*S18
+    Cq117 = -s.trq[1,17]+Cq118+s.In[1,17]*OMp117-s.In[5,17]*OM217*OM317+s.In[9,17]*OM217*OM317-Fs217*s.l[3,17]- \
+ 	  s.dpt[3,13]*(-Fq318*S18+Fs219*C18)
+    Cq217 = -s.trq[2,17]+s.In[1,17]*OM117*OM317+s.In[5,17]*OMp217-s.In[9,17]*OM117*OM317+Cq219*C18-Cq318*S18+Fq118* \
+ 	  s.dpt[3,13]+Fs117*s.l[3,17]
+    Cq317 = -s.trq[3,17]-s.In[1,17]*OM117*OM217+s.In[5,17]*OM117*OM217+s.In[9,17]*OMp317+Cq219*S18+Cq318*C18
+    Fs116 = -s.frc[1,16]+s.m[16]*(ALPHA115+BETA316*s.l[3,16])
+    Fs216 = -s.frc[2,16]+s.m[16]*(ALPHA216+BETA616*s.l[3,16])
+    Fs316 = -s.frc[3,16]+s.m[16]*(ALPHA316+BS916*s.l[3,16])
+    Cq116 = -s.trq[1,16]+s.In[1,16]*OMp116-s.In[5,16]*OM216*OM316+s.In[9,16]*OM216*OM316-Fs216*s.l[3,16]
+    Cq216 = -s.trq[2,16]+s.In[1,16]*OM116*OM316+s.In[5,16]*OMp216-s.In[9,16]*OM116*OM316+Fs116*s.l[3,16]
+    Cq316 = -s.trq[3,16]-s.In[1,16]*OM116*OM216+s.In[5,16]*OM116*OM216+s.In[9,16]*OMp316
+    Fq215 = Fs216*C16-Fs316*S16
+    Fq315 = Fs216*S16+Fs316*C16
+    Cq215 = Cq216*C16-Cq316*S16
+    Cq315 = Cq216*S16+Cq316*C16
+    Fs114 = -s.frc[1,14]+s.m[14]*(ALPHA114+BETA314*s.l[3,14])
+    Fs214 = -s.frc[2,14]+s.m[14]*(ALPHA214+BETA614*s.l[3,14])
+    Fs314 = -s.frc[3,14]+s.m[14]*(ALPHA314+BS914*s.l[3,14])
+    Fq114 = Fs114+Fq315*S15+Fs116*C15
+    Fq214 = Fq215+Fs214
+    Fq314 = Fs314+Fq315*C15-Fs116*S15
+    Cq114 = -s.trq[1,14]+s.In[1,14]*OMp114-s.In[5,14]*OM214*OM314+s.In[9,14]*OM214*OM314+Cq116*C15+Cq315*S15-Fq215* \
+ 	  s.dpt[3,11]-Fs214*s.l[3,14]
+    Cq214 = -s.trq[2,14]+Cq215+s.In[1,14]*OM114*OM314+s.In[5,14]*OMp214-s.In[9,14]*OM114*OM314+Fs114*s.l[3,14]+ \
+ 	  s.dpt[3,11]*(Fq315*S15+Fs116*C15)
+    Cq314 = -s.trq[3,14]-s.In[1,14]*OM114*OM214+s.In[5,14]*OM114*OM214+s.In[9,14]*OMp314-Cq116*S15+Cq315*C15
     Fs113 = -s.frc[1,13]+s.m[13]*(ALPHA113+BETA313*s.l[3,13])
-    Fs213 = -s.frc[2,13]+s.m[13]*(ALPHA213+BETA613*s.l[3,13])
+    Fs213 = -s.frc[2,13]+s.m[13]*(ALPHA212+BETA613*s.l[3,13])
     Fs313 = -s.frc[3,13]+s.m[13]*(ALPHA313+BS913*s.l[3,13])
-    Fq113 = Fq114+Fs113
-    Fq213 = Fs213-Fq314*S14+Fs215*C14
-    Fq313 = Fs313+Fq314*C14+Fs215*S14
-    Cq113 = -s.trq[1,13]+Cq114+s.In[1,13]*OMp113-s.In[5,13]*OM213*OM313+s.In[9,13]*OM213*OM313-Fs213*s.l[3,13]- \
- 	  s.dpt[3,16]*(-Fq314*S14+Fs215*C14)
-    Cq213 = -s.trq[2,13]+s.In[1,13]*OM113*OM313+s.In[5,13]*OMp213-s.In[9,13]*OM113*OM313+Cq215*C14-Cq314*S14+Fq114* \
- 	  s.dpt[3,16]+Fs113*s.l[3,13]
-    Cq313 = -s.trq[3,13]-s.In[1,13]*OM113*OM213+s.In[5,13]*OM113*OM213+s.In[9,13]*OMp313+Cq215*S14+Cq314*C14
-    Fs112 = -s.frc[1,12]+s.m[12]*(ALPHA111+BETA312*s.l[3,12])
-    Fs212 = -s.frc[2,12]+s.m[12]*(ALPHA212+BETA612*s.l[3,12])
-    Fs312 = -s.frc[3,12]+s.m[12]*(ALPHA312+BS912*s.l[3,12])
-    Cq112 = -s.trq[1,12]+s.In[1,12]*OMp112-s.In[5,12]*OM212*OM312+s.In[9,12]*OM212*OM312-Fs212*s.l[3,12]
-    Cq212 = -s.trq[2,12]+s.In[1,12]*OM112*OM312+s.In[5,12]*OMp212-s.In[9,12]*OM112*OM312+Fs112*s.l[3,12]
-    Cq312 = -s.trq[3,12]-s.In[1,12]*OM112*OM212+s.In[5,12]*OM112*OM212+s.In[9,12]*OMp312
-    Fq211 = Fs212*C12-Fs312*S12
-    Fq311 = Fs212*S12+Fs312*C12
-    Cq211 = Cq212*C12-Cq312*S12
-    Cq311 = Cq212*S12+Cq312*C12
-    Fs110 = -s.frc[1,10]+s.m[10]*(ALPHA110+BETA310*s.l[3,10])
-    Fs210 = -s.frc[2,10]+s.m[10]*(ALPHA210+BETA610*s.l[3,10])
-    Fs310 = -s.frc[3,10]+s.m[10]*(ALPHA310+BS910*s.l[3,10])
-    Fq110 = Fs110+Fq311*S11+Fs112*C11
-    Fq210 = Fq211+Fs210
-    Fq310 = Fs310+Fq311*C11-Fs112*S11
-    Cq110 = -s.trq[1,10]+s.In[1,10]*OMp110-s.In[5,10]*OM210*OM310+s.In[9,10]*OM210*OM310+Cq112*C11+Cq311*S11-Fq211* \
- 	  s.dpt[3,13]-Fs210*s.l[3,10]
-    Cq210 = -s.trq[2,10]+Cq211+s.In[1,10]*OM110*OM310+s.In[5,10]*OMp210-s.In[9,10]*OM110*OM310+Fs110*s.l[3,10]+ \
- 	  s.dpt[3,13]*(Fq311*S11+Fs112*C11)
-    Cq310 = -s.trq[3,10]-s.In[1,10]*OM110*OM210+s.In[5,10]*OM110*OM210+s.In[9,10]*OMp310-Cq112*S11+Cq311*C11
-    Fs19 = -s.frc[1,9]+s.m[9]*(ALPHA19+BETA39*s.l[3,9])
-    Fs29 = -s.frc[2,9]+s.m[9]*(ALPHA28+BETA69*s.l[3,9])
-    Fs39 = -s.frc[3,9]+s.m[9]*(ALPHA39+BS99*s.l[3,9])
-    Cq19 = -s.trq[1,9]+s.In[1,9]*OMp19-s.In[5,9]*OM29*OM39+s.In[9,9]*OM29*OM39-Fs29*s.l[3,9]
-    Cq29 = -s.trq[2,9]+s.In[1,9]*OM19*OM39+s.In[5,9]*OMp29-s.In[9,9]*OM19*OM39+Fs19*s.l[3,9]
-    Cq39 = -s.trq[3,9]-s.In[1,9]*OM19*OM29+s.In[5,9]*OM19*OM29+s.In[9,9]*OMp39
-    Fq18 = Fs19*C9+Fs39*S9
-    Fq38 = -Fs19*S9+Fs39*C9
-    Cq18 = Cq19*C9+Cq39*S9
-    Cq38 = -Cq19*S9+Cq39*C9
-    Fs17 = -s.frc[1,7]+s.m[7]*(ALPHA17+BETA37*s.l[3,7])
-    Fs27 = -s.frc[2,7]+s.m[7]*(ALPHA27+BETA67*s.l[3,7])
-    Fs37 = -s.frc[3,7]+s.m[7]*(ALPHA37+BS97*s.l[3,7])
-    Fq17 = Fq18+Fs17
-    Fq27 = Fs27-Fq38*S8+Fs29*C8
-    Fq37 = Fs37+Fq38*C8+Fs29*S8
-    Cq17 = -s.trq[1,7]+Cq18+s.In[1,7]*OMp17-s.In[5,7]*OM27*OM37+s.In[9,7]*OM27*OM37-Fs27*s.l[3,7]-s.dpt[3,10]*(-Fq38* \
- 	  S8+Fs29*C8)
-    Cq27 = -s.trq[2,7]+s.In[1,7]*OM17*OM37+s.In[5,7]*OMp27-s.In[9,7]*OM17*OM37+Cq29*C8-Cq38*S8+Fq18*s.dpt[3,10]+Fs17* \
- 	  s.l[3,7]
-    Cq37 = -s.trq[3,7]-s.In[1,7]*OM17*OM27+s.In[5,7]*OM17*OM27+s.In[9,7]*OMp37+Cq29*S8+Cq38*C8
+    Cq113 = -s.trq[1,13]+s.In[1,13]*OMp113-s.In[5,13]*OM213*OM313+s.In[9,13]*OM213*OM313-Fs213*s.l[3,13]
+    Cq213 = -s.trq[2,13]+s.In[1,13]*OM113*OM313+s.In[5,13]*OMp213-s.In[9,13]*OM113*OM313+Fs113*s.l[3,13]
+    Cq313 = -s.trq[3,13]-s.In[1,13]*OM113*OM213+s.In[5,13]*OM113*OM213+s.In[9,13]*OMp313
+    Fq112 = Fs113*C13+Fs313*S13
+    Fq312 = -Fs113*S13+Fs313*C13
+    Cq112 = Cq113*C13+Cq313*S13
+    Cq312 = -Cq113*S13+Cq313*C13
+    Fs111 = -s.frc[1,11]+s.m[11]*(ALPHA110+BETA311*s.l[3,11])
+    Fs211 = -s.frc[2,11]+s.m[11]*(ALPHA211+BETA611*s.l[3,11])
+    Fs311 = -s.frc[3,11]+s.m[11]*(ALPHA311+BS911*s.l[3,11])
+    Fq111 = Fq112+Fs111
+    Fq211 = Fs211-Fq312*S12+Fs213*C12
+    Fq311 = Fs311+Fq312*C12+Fs213*S12
+    Cq111 = -s.trq[1,11]+Cq112+s.In[1,11]*OMp111-s.In[5,11]*OM211*OM311+s.In[9,11]*OM211*OM311-Fs211*s.l[3,11]- \
+ 	  s.dpt[3,9]*(-Fq312*S12+Fs213*C12)
+    Cq211 = -s.trq[2,11]+s.In[1,11]*OM111*OM311+s.In[5,11]*OMp211-s.In[9,11]*OM111*OM311+Cq213*C12-Cq312*S12+Fq112* \
+ 	  s.dpt[3,9]+Fs111*s.l[3,11]
+    Cq311 = -s.trq[3,11]-s.In[1,11]*OM111*OM211+s.In[5,11]*OM111*OM211+s.In[9,11]*OMp311+Cq213*S12+Cq312*C12
+    Fq110 = -s.frc[1,10]+Fq111
+    Fq210 = -s.frc[2,10]+Fq211*C11-Fq311*S11
+    Fq310 = -s.frc[3,10]+Fq211*S11+Fq311*C11
+    Cq110 = -s.trq[1,10]+Cq111
+    Cq210 = -s.trq[2,10]+Cq211*C11-Cq311*S11
+    Cq310 = -s.trq[3,10]+Cq211*S11+Cq311*C11
+    Fq19 = Fq110*C10+Fq310*S10
+    Fq39 = -Fq110*S10+Fq310*C10
+    Cq19 = Cq110*C10+Cq310*S10
+    Cq39 = -Cq110*S10+Cq310*C10
+    Cq18 = Cq19-q[9]*Fq210
+    Cq28 = Cq210+q[9]*Fq19
+    Fs17 = -s.frc[1,7]+s.m[7]*(ALPHA17+BS17*s.l[1,7])
+    Fs27 = -s.frc[2,7]+s.m[7]*(ALPHA27+BETA47*s.l[1,7])
+    Fs37 = -s.frc[3,7]+s.m[7]*(ALPHA37+BETA77*s.l[1,7])
+    Fq17 = Fq19+Fs17
+    Fq27 = Fq210+Fs27
+    Fq37 = Fq39+Fs37
+    Cq17 = -s.trq[1,7]+Cq18+s.In[1,7]*OMp13-s.In[5,7]*OM23*OM33+s.In[9,7]*OM23*OM33+Fq39*s.dpt[2,7]
+    Cq27 = -s.trq[2,7]+Cq28-q[8]*Fq39+s.In[1,7]*OM13*OM33+s.In[5,7]*OMp23-s.In[9,7]*OM13*OM33-Fs37*s.l[1,7]
+    Cq37 = -s.trq[3,7]+Cq39+q[8]*Fq210-s.In[1,7]*OM13*OM23+s.In[5,7]*OM13*OM23+s.In[9,7]*OMp33-Fq19*s.dpt[2,7]+Fs27* \
+ 	  s.l[1,7]
     Fs16 = -s.frc[1,6]+s.m[6]*(ALPHA15+BETA36*s.l[3,6])
     Fs26 = -s.frc[2,6]+s.m[6]*(ALPHA26+BETA66*s.l[3,6])
     Fs36 = -s.frc[3,6]+s.m[6]*(ALPHA36+BS96*s.l[3,6])
@@ -321,21 +375,21 @@ def invdyna(phi,s,tsim):
     Fq14 = Fs14+Fq35*S5+Fs16*C5
     Fq24 = Fq25+Fs24
     Fq34 = Fs34+Fq35*C5-Fs16*S5
-    Cq14 = -s.trq[1,4]+s.In[1,4]*OMp14-s.In[5,4]*OM24*OM34+s.In[9,4]*OM24*OM34+Cq16*C5+Cq35*S5-Fq25*s.dpt[3,8]-Fs24* \
+    Cq14 = -s.trq[1,4]+s.In[1,4]*OMp14-s.In[5,4]*OM24*OM34+s.In[9,4]*OM24*OM34+Cq16*C5+Cq35*S5-Fq25*s.dpt[3,5]-Fs24* \
  	  s.l[3,4]
-    Cq24 = -s.trq[2,4]+Cq25+s.In[1,4]*OM14*OM34+s.In[5,4]*OMp24-s.In[9,4]*OM14*OM34+Fs14*s.l[3,4]+s.dpt[3,8]*(Fq35*S5 \
+    Cq24 = -s.trq[2,4]+Cq25+s.In[1,4]*OM14*OM34+s.In[5,4]*OMp24-s.In[9,4]*OM14*OM34+Fs14*s.l[3,4]+s.dpt[3,5]*(Fq35*S5 \
  	  +Fs16*C5)
     Cq34 = -s.trq[3,4]-s.In[1,4]*OM14*OM24+s.In[5,4]*OM14*OM24+s.In[9,4]*OMp34-Cq16*S5+Cq35*C5
     Fs13 = -s.frc[1,3]+s.m[3]*(ALPHA13+BETA33*s.l[3,3])
     Fs23 = -s.frc[2,3]+s.m[3]*(ALPHA22+BETA63*s.l[3,3])
-    Cq13 = -s.trq[1,3]+Cq113+Cq17+s.In[1,3]*OMp13-s.In[5,3]*OM23*OM33+s.In[9,3]*OM23*OM33+Cq110*C10+Cq14*C4+Cq310*S10 \
- 	  +Cq34*S4-Fq210*s.dpt[3,3]-Fq24*s.dpt[3,1]-Fs23*s.l[3,3]+s.dpt[2,2]*(Fq27*S7+Fq37*C7)+s.dpt[2,4]*(Fq213*S13+Fq313*C13)- \
- 	  s.dpt[3,2]*(Fq27*C7-Fq37*S7)-s.dpt[3,4]*(Fq213*C13-Fq313*S13)
-    Cq23 = -s.trq[2,3]+Cq210+Cq24+s.In[1,3]*OM13*OM33+s.In[5,3]*OMp23-s.In[9,3]*OM13*OM33+Cq213*C13+Cq27*C7-Cq313*S13 \
- 	  -Cq37*S7+Fq113*s.dpt[3,4]+Fq17*s.dpt[3,2]+Fs13*s.l[3,3]-s.dpt[1,1]*(-Fq14*S4+Fq34*C4)-s.dpt[1,3]*(-Fq110*S10+Fq310*C10 \
- 	  )+s.dpt[3,1]*(Fq14*C4+Fq34*S4)+s.dpt[3,3]*(Fq110*C10+Fq310*S10)
-    Cq33 = -s.trq[3,3]-s.In[1,3]*OM13*OM23+s.In[5,3]*OM13*OM23+s.In[9,3]*OMp33-Cq110*S10-Cq14*S4+Cq213*S13+Cq27*S7+ \
- 	  Cq310*C10+Cq313*C13+Cq34*C4+Cq37*C7-Fq113*s.dpt[2,4]-Fq17*s.dpt[2,2]+Fq210*s.dpt[1,3]+Fq24*s.dpt[1,1]
+    Cq13 = -s.trq[1,3]+Cq117+Cq17+s.In[1,3]*OMp13-s.In[5,3]*OM23*OM33+s.In[9,3]*OM23*OM33+Cq114*C14+Cq14*C4+Cq314*S14 \
+ 	  +Cq34*S4-Fq214*s.dpt[3,3]-Fq24*s.dpt[3,1]-Fq27*s.dpt[3,2]-Fs23*s.l[3,3]+s.dpt[2,4]*(Fq217*S17+Fq317*C17)-s.dpt[3,4]*( \
+ 	  Fq217*C17-Fq317*S17)
+    Cq23 = -s.trq[2,3]+Cq214+Cq24+Cq27-q[7]*Fq37+s.In[1,3]*OM13*OM33+s.In[5,3]*OMp23-s.In[9,3]*OM13*OM33+Cq217*C17- \
+ 	  Cq317*S17+Fq117*s.dpt[3,4]+Fq17*s.dpt[3,2]+Fs13*s.l[3,3]-s.dpt[1,1]*(-Fq14*S4+Fq34*C4)-s.dpt[1,3]*(-Fq114*S14+Fq314* \
+ 	  C14)+s.dpt[3,1]*(Fq14*C4+Fq34*S4)+s.dpt[3,3]*(Fq114*C14+Fq314*S14)
+    Cq33 = -s.trq[3,3]+Cq37+q[7]*Fq27-s.In[1,3]*OM13*OM23+s.In[5,3]*OM13*OM23+s.In[9,3]*OMp33-Cq114*S14-Cq14*S4+Cq217 \
+ 	  *S17+Cq314*C14+Cq317*C17+Cq34*C4-Fq117*s.dpt[2,4]+Fq214*s.dpt[1,3]+Fq24*s.dpt[1,1]
     Cq12 = Cq13*C3+Cq33*S3
     Cq32 = -Cq13*S3+Cq33*C3
     Cq31 = Cq23*S2+Cq32*C2
@@ -348,15 +402,19 @@ def invdyna(phi,s,tsim):
     Qq[4] = Cq24
     Qq[5] = Cq25
     Qq[6] = Cq16
-    Qq[7] = Cq17
-    Qq[8] = Cq18
-    Qq[9] = Cq29
+    Qq[7] = Fq17
+    Qq[8] = Fq19
+    Qq[9] = Fq39
     Qq[10] = Cq210
-    Qq[11] = Cq211
+    Qq[11] = Cq111
     Qq[12] = Cq112
-    Qq[13] = Cq113
-    Qq[14] = Cq114
+    Qq[13] = Cq213
+    Qq[14] = Cq214
     Qq[15] = Cq215
+    Qq[16] = Cq116
+    Qq[17] = Cq117
+    Qq[18] = Cq118
+    Qq[19] = Cq219
 
 # Number of continuation lines = 2
 

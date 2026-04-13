@@ -15,13 +15,13 @@
     <graphics>
       <x2D>
         <position>
-          <x>679.0</x>
-          <y>1393.0</y>
+          <x>651.0</x>
+          <y>1465.0</y>
         </position>
         <base_body>
           <position>
-            <x>-219.0</x>
-            <y>-78.0</y>
+            <x>-222.0</x>
+            <y>-37.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -34,20 +34,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>219.0</x>
-              <y>-78.0</y>
+              <x>216.0</x>
+              <y>-37.0</y>
             </control_point>
             <control_point>
-              <x>219.0</x>
-              <y>44.0</y>
+              <x>216.0</x>
+              <y>85.0</y>
             </control_point>
             <control_point>
-              <x>-219.0</x>
-              <y>44.0</y>
+              <x>-222.0</x>
+              <y>85.0</y>
             </control_point>
             <control_point>
-              <x>-219.0</x>
-              <y>-78.0</y>
+              <x>-222.0</x>
+              <y>-37.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -68,14 +68,14 @@
         <pointname>origin</pointname>
       </parent>
       <joint>
-        <jointname>Pole3</jointname>
+        <jointname>R3_Pole</jointname>
         <type>R3</type>
         <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
-              <x>637.0</x>
-              <y>1343.0</y>
+              <x>617.0</x>
+              <y>1392.0</y>
             </position>
           </x2D>
           <x3D>
@@ -85,7 +85,7 @@
         </graphics>
       </joint>
       <joint>
-        <jointname>Pole1</jointname>
+        <jointname>R1_Pole</jointname>
         <type>R1</type>
         <nature>driven</nature>
         <symbols>
@@ -96,8 +96,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>693.0</x>
-              <y>1334.0</y>
+              <x>680.0</x>
+              <y>1348.0</y>
             </position>
           </x2D>
           <x3D>
@@ -107,7 +107,7 @@
         </graphics>
       </joint>
       <joint>
-        <jointname>Pole2</jointname>
+        <jointname>R2_Pole</jointname>
         <type>R2</type>
         <nature>driven</nature>
         <symbols>
@@ -151,8 +151,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>1007.0</x>
-              <y>625.0</y>
+              <x>1161.0</x>
+              <y>656.0</y>
             </position>
           </x2D>
           <x3D />
@@ -162,14 +162,14 @@
         <pointname>arm4</pointname>
         <coordinates>
           <x>0.0</x>
-          <y>-1.0</y>
+          <y>0.0</y>
           <z>4.5</z>
         </coordinates>
         <graphics>
           <x2D>
             <position>
-              <x>699.0</x>
-              <y>750.0</y>
+              <x>692.0</x>
+              <y>721.0</y>
             </position>
           </x2D>
           <x3D />
@@ -204,57 +204,6 @@
             <position>
               <x>677.0</x>
               <y>344.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
-        <pointname>spring2</pointname>
-        <coordinates>
-          <x>0.0</x>
-          <y>0.5</y>
-          <z>4.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>609.0</x>
-              <y>343.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
-        <pointname>spring3</pointname>
-        <coordinates>
-          <x>-0.5</x>
-          <y>0.0</y>
-          <z>4.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>227.0</x>
-              <y>633.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
-        <pointname>spring4</pointname>
-        <coordinates>
-          <x>0.0</x>
-          <y>-0.5</y>
-          <z>4.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>650.0</x>
-              <y>747.0</y>
             </position>
           </x2D>
           <x3D />
@@ -335,7 +284,7 @@
         <pointname>arm1</pointname>
       </parent>
       <joint>
-        <jointname>arm_pend1</jointname>
+        <jointname>R2_arm_pend1</jointname>
         <type>R2</type>
         <nature>independent</nature>
         <initialvalue>
@@ -344,8 +293,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>1051.0</x>
-              <y>631.0</y>
+              <x>1226.0</x>
+              <y>657.0</y>
             </position>
           </x2D>
           <x3D>
@@ -377,8 +326,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>1053.0</x>
-              <y>813.0</y>
+              <x>1228.0</x>
+              <y>839.0</y>
             </position>
           </x2D>
           <x3D />
@@ -459,14 +408,14 @@
         <pointname>arm_to_nacelle1</pointname>
       </parent>
       <joint>
-        <jointname>R_cardan1a</jointname>
+        <jointname>R2_cardan1</jointname>
         <type>R2</type>
         <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
-              <x>1024.0</x>
-              <y>847.0</y>
+              <x>1234.0</x>
+              <y>903.0</y>
             </position>
           </x2D>
           <x3D>
@@ -476,14 +425,14 @@
         </graphics>
       </joint>
       <joint>
-        <jointname>R_cardan1b</jointname>
+        <jointname>R1_cardan1</jointname>
         <type>R1</type>
         <nature>independent</nature>
         <graphics>
           <x2D>
             <position>
-              <x>1088.0</x>
-              <y>852.0</y>
+              <x>1305.0</x>
+              <y>907.0</y>
             </position>
           </x2D>
           <x3D>
@@ -515,8 +464,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>1093.0</x>
-              <y>914.0</y>
+              <x>1307.0</x>
+              <y>962.0</y>
             </position>
           </x2D>
           <x3D />
@@ -545,8 +494,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-17.0</x>
-            <y>-15.0</y>
+            <x>-20.0</x>
+            <y>-22.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -559,20 +508,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>84.0</x>
-              <y>-15.0</y>
+              <x>81.0</x>
+              <y>-22.0</y>
             </control_point>
             <control_point>
-              <x>84.0</x>
-              <y>100.0</y>
+              <x>81.0</x>
+              <y>93.0</y>
             </control_point>
             <control_point>
-              <x>-17.0</x>
-              <y>100.0</y>
+              <x>-20.0</x>
+              <y>93.0</y>
             </control_point>
             <control_point>
-              <x>-17.0</x>
-              <y>-15.0</y>
+              <x>-20.0</x>
+              <y>-22.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -614,10 +563,241 @@
       </graphics>
     </body>
     <body>
-      <bodyname>Pendule4</bodyname>
+      <bodyname>arm_part1</bodyname>
       <parent>
         <bodyname>Pole</bodyname>
         <pointname>arm4</pointname>
+      </parent>
+      <joint>
+        <jointname>R2_arm_pend2</jointname>
+        <type>T1</type>
+        <nature>driven</nature>
+        <symbols>
+          <q />
+          <qd />
+          <qdd />
+        </symbols>
+        <graphics>
+          <x2D>
+            <position>
+              <x>768.0</x>
+              <y>679.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <mass>30.0</mass>
+      <com>
+        <coordinates>
+          <x>-0.5</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+      </com>
+      <inertia>
+        <Ixx>1.0</Ixx>
+        <Iyy>1.0</Iyy>
+        <Izz>1.0</Izz>
+      </inertia>
+      <point>
+        <pointname>arm_mesure</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>-1.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>853.0</x>
+              <y>683.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>6.0</x>
+            <y>-21.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>95.0</x>
+            <y>43.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>101.0</x>
+              <y>-21.0</y>
+            </control_point>
+            <control_point>
+              <x>101.0</x>
+              <y>22.0</y>
+            </control_point>
+            <control_point>
+              <x>6.0</x>
+              <y>22.0</y>
+            </control_point>
+            <control_point>
+              <x>6.0</x>
+              <y>-21.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>arm_part2</bodyname>
+      <parent>
+        <bodyname>arm_part1</bodyname>
+        <pointname>arm_mesure</pointname>
+      </parent>
+      <joint>
+        <jointname>T1_effort_normal</jointname>
+        <type>T1</type>
+        <nature>driven</nature>
+        <symbols>
+          <q />
+          <qd />
+          <qdd />
+        </symbols>
+        <graphics>
+          <x2D>
+            <position>
+              <x>909.0</x>
+              <y>674.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <joint>
+        <jointname>T3_effort_tranchant</jointname>
+        <type>T3</type>
+        <nature>driven</nature>
+        <symbols>
+          <q />
+          <qd />
+          <qdd />
+        </symbols>
+        <graphics>
+          <x2D>
+            <position>
+              <x>912.0</x>
+              <y>732.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <joint>
+        <jointname>R2_effort_flechissant</jointname>
+        <type>R2</type>
+        <nature>driven</nature>
+        <symbols>
+          <q />
+          <qd />
+          <qdd />
+        </symbols>
+        <graphics>
+          <x2D>
+            <position>
+              <x>983.0</x>
+              <y>719.0</y>
+            </position>
+          </x2D>
+          <x3D>
+            <x3D_joint />
+            <x3D_frame />
+          </x3D>
+        </graphics>
+      </joint>
+      <point>
+        <pointname>end_arm</pointname>
+        <coordinates>
+          <x>0.0</x>
+          <y>0.0</y>
+          <z>0.0</z>
+        </coordinates>
+        <graphics>
+          <x2D>
+            <position>
+              <x>1027.0</x>
+              <y>720.0</y>
+            </position>
+          </x2D>
+          <x3D />
+        </graphics>
+      </point>
+      <graphics>
+        <x2D>
+          <position>
+            <x>-14.0</x>
+            <y>-29.0</y>
+          </position>
+          <name_pos>
+            <x>0.0</x>
+            <y>0.0</y>
+          </name_pos>
+          <shape>rectangle</shape>
+          <size>
+            <x>70.0</x>
+            <y>48.0</y>
+          </size>
+          <control_points>
+            <control_point>
+              <x>56.0</x>
+              <y>-29.0</y>
+            </control_point>
+            <control_point>
+              <x>56.0</x>
+              <y>19.0</y>
+            </control_point>
+            <control_point>
+              <x>-14.0</x>
+              <y>19.0</y>
+            </control_point>
+            <control_point>
+              <x>-14.0</x>
+              <y>-29.0</y>
+            </control_point>
+          </control_points>
+          <angle>0.0</angle>
+        </x2D>
+        <x3D>
+          <x3D_com />
+          <x3D_points />
+          <x3D_lines />
+        </x3D>
+      </graphics>
+    </body>
+    <body>
+      <bodyname>Pendule4</bodyname>
+      <parent>
+        <bodyname>arm_part2</bodyname>
+        <pointname>end_arm</pointname>
       </parent>
       <joint>
         <jointname>arm_pend4</jointname>
@@ -629,8 +809,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>773.0</x>
-              <y>748.0</y>
+              <x>885.0</x>
+              <y>810.0</y>
             </position>
           </x2D>
           <x3D>
@@ -662,25 +842,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>776.0</x>
-              <y>918.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
-        <pointname>Point_1</pointname>
-        <coordinates>
-          <x>0.0</x>
-          <y>0.1</y>
-          <z>-1.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>762.0</x>
-              <y>831.0</y>
+              <x>886.0</x>
+              <y>925.0</y>
             </position>
           </x2D>
           <x3D />
@@ -689,8 +852,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-14.0</x>
-            <y>-22.0</y>
+            <x>-15.0</x>
+            <y>-12.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -698,24 +861,24 @@
           </name_pos>
           <shape>rectangle</shape>
           <size>
-            <x>44.0</x>
-            <y>209.0</y>
+            <x>41.0</x>
+            <y>161.0</y>
           </size>
           <control_points>
             <control_point>
-              <x>30.0</x>
+              <x>29.0</x>
               <y>-22.0</y>
             </control_point>
             <control_point>
-              <x>30.0</x>
+              <x>29.0</x>
               <y>187.0</y>
             </control_point>
             <control_point>
-              <x>-14.0</x>
+              <x>-15.0</x>
               <y>187.0</y>
             </control_point>
             <control_point>
-              <x>-14.0</x>
+              <x>-15.0</x>
               <y>-22.0</y>
             </control_point>
           </control_points>
@@ -767,8 +930,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>745.0</x>
-              <y>953.0</y>
+              <x>886.0</x>
+              <y>1038.0</y>
             </position>
           </x2D>
           <x3D>
@@ -784,8 +947,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>791.0</x>
-              <y>951.0</y>
+              <x>960.0</x>
+              <y>1030.0</y>
             </position>
           </x2D>
           <x3D>
@@ -817,8 +980,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>794.0</x>
-              <y>1035.0</y>
+              <x>961.0</x>
+              <y>1115.0</y>
             </position>
           </x2D>
           <x3D />
@@ -847,8 +1010,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-14.0</x>
-            <y>-9.0</y>
+            <x>-16.0</x>
+            <y>-8.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -861,20 +1024,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>100.0</x>
-              <y>-9.0</y>
+              <x>98.0</x>
+              <y>-8.0</y>
             </control_point>
             <control_point>
-              <x>100.0</x>
-              <y>99.0</y>
+              <x>98.0</x>
+              <y>100.0</y>
             </control_point>
             <control_point>
-              <x>-14.0</x>
-              <y>99.0</y>
+              <x>-16.0</x>
+              <y>100.0</y>
             </control_point>
             <control_point>
-              <x>-14.0</x>
-              <y>-9.0</y>
+              <x>-16.0</x>
+              <y>-8.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -931,8 +1094,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>350.0</x>
-              <y>626.0</y>
+              <x>254.0</x>
+              <y>632.0</y>
             </position>
           </x2D>
           <x3D>
@@ -964,25 +1127,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>348.0</x>
-              <y>776.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
-      <point>
-        <pointname>Point_1</pointname>
-        <coordinates>
-          <x>0.1</x>
-          <y>0.0</y>
-          <z>-1.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>367.0</x>
-              <y>712.0</y>
+              <x>253.0</x>
+              <y>788.0</y>
             </position>
           </x2D>
           <x3D />
@@ -991,8 +1137,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-17.0</x>
-            <y>-22.0</y>
+            <x>-16.0</x>
+            <y>-16.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -1005,20 +1151,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>17.0</x>
-              <y>-22.0</y>
+              <x>18.0</x>
+              <y>-16.0</y>
             </control_point>
             <control_point>
-              <x>17.0</x>
-              <y>164.0</y>
+              <x>18.0</x>
+              <y>170.0</y>
             </control_point>
             <control_point>
-              <x>-17.0</x>
-              <y>164.0</y>
+              <x>-16.0</x>
+              <y>170.0</y>
             </control_point>
             <control_point>
-              <x>-17.0</x>
-              <y>-22.0</y>
+              <x>-16.0</x>
+              <y>-16.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>
@@ -1069,8 +1215,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>305.0</x>
-              <y>807.0</y>
+              <x>253.0</x>
+              <y>871.0</y>
             </position>
           </x2D>
           <x3D>
@@ -1086,8 +1232,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>377.0</x>
-              <y>811.0</y>
+              <x>330.0</x>
+              <y>881.0</y>
             </position>
           </x2D>
           <x3D>
@@ -1119,8 +1265,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>380.0</x>
-              <y>882.0</y>
+              <x>333.0</x>
+              <y>952.0</y>
             </position>
           </x2D>
           <x3D />
@@ -1150,7 +1296,7 @@
         <x2D>
           <position>
             <x>-14.0</x>
-            <y>-22.0</y>
+            <y>-28.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -1158,8 +1304,8 @@
           </name_pos>
           <shape>rectangle</shape>
           <size>
-            <x>119.0</x>
-            <y>112.0</y>
+            <x>100.0</x>
+            <y>118.0</y>
           </size>
           <control_points>
             <control_point>
@@ -1273,23 +1419,6 @@
           <x3D />
         </graphics>
       </point>
-      <point>
-        <pointname>Point_1</pointname>
-        <coordinates>
-          <x>0.0</x>
-          <y>-0.1</y>
-          <z>-1.5</z>
-        </coordinates>
-        <graphics>
-          <x2D>
-            <position>
-              <x>706.0</x>
-              <y>414.0</y>
-            </position>
-          </x2D>
-          <x3D />
-        </graphics>
-      </point>
       <graphics>
         <x2D>
           <position>
@@ -1371,8 +1500,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>694.0</x>
-              <y>493.0</y>
+              <x>716.0</x>
+              <y>526.0</y>
             </position>
           </x2D>
           <x3D>
@@ -1388,8 +1517,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>741.0</x>
-              <y>493.0</y>
+              <x>827.0</x>
+              <y>521.0</y>
             </position>
           </x2D>
           <x3D>
@@ -1421,8 +1550,8 @@
         <graphics>
           <x2D>
             <position>
-              <x>744.0</x>
-              <y>563.0</y>
+              <x>825.0</x>
+              <y>574.0</y>
             </position>
           </x2D>
           <x3D />
@@ -1451,8 +1580,8 @@
       <graphics>
         <x2D>
           <position>
-            <x>-8.0</x>
-            <y>-10.0</y>
+            <x>-13.0</x>
+            <y>-27.0</y>
           </position>
           <name_pos>
             <x>0.0</x>
@@ -1465,20 +1594,20 @@
           </size>
           <control_points>
             <control_point>
-              <x>105.0</x>
-              <y>-10.0</y>
+              <x>100.0</x>
+              <y>-27.0</y>
             </control_point>
             <control_point>
-              <x>105.0</x>
-              <y>89.0</y>
+              <x>100.0</x>
+              <y>72.0</y>
             </control_point>
             <control_point>
-              <x>-8.0</x>
-              <y>89.0</y>
+              <x>-13.0</x>
+              <y>72.0</y>
             </control_point>
             <control_point>
-              <x>-8.0</x>
-              <y>-10.0</y>
+              <x>-13.0</x>
+              <y>-27.0</y>
             </control_point>
           </control_points>
           <angle>0.0</angle>

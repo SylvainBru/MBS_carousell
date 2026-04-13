@@ -1,0 +1,69 @@
+def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData): 
+    """
+        Etape 1: Parcourt l'arbre de la base vers les feuilles
+        Calcule les vitesses et accélérations dans chaque corps. 
+    """
+
+    N_body = mbs_data.njoint 
+
+    inbody = topology["inbody"]
+    phi    = topology["phi"]
+    psi    = topology["psi"]
+    d_hi   = topology["d_hi"]
+
+    #Allocations mémoires (taille n+1 pour inclure la base à l'index 0)
+    omega       = np.zeros((3, N_body + 1))
+    omega_c_dot = np.zeros((3, N_body + 1))
+    alpha_c     = np.zeros((3, N_body + 1))
+    beta_c      = np.zeros((3, 3, N_body + 1))
+    R           = np.zeros((3, 3, N_body + 1)) # Matrices de rotation R^{i,h}
+
+    O_M = np.zeros((3, N_body + 1, N_body + 1))
+    A_M = np.zeros((3, N_body + 1, N_body + 1))
+
+    #Condition initiale 
+    alpha_c[:, 0] = -mbs_data.g[1:4]  
+    R[:, :, 0]    = np.eye(3)
+
+    print("len inbody: " + str(len(inbody)))
+    print("N_body: "+ str(N_body))
+    print("N_joint: " + str(mbs_data.nbody))
+
+    for i in range(N_body):  #Boucle sur tout les corps/joints
+        h =  inbody[i]  #Prend l'indice du corps parents
+        R[:, :, i] = rotation_matrix(phi[:, i], q[i]).T 
+        R_ih = R[:, :, i]
+        
+        phi_i = phi[:, i]
+        psi_i = psi[:, i]
+        
+        # --- TIROIR "c" : Termes liés aux vitesses et à la gravité ---
+        
+        # Vitesse angulaire (Eq 3.58)
+        omega[:, i] = R_ih @ omega[:, h] + phi_i * qd[i]
+        
+        # Accélération angulaire sans les qdd (Eq 3.59)
+        omega_c_dot[:, i] = R_ih @ omega_c_dot[:, h] + tilde(omega[:, i]) @ (phi_i * qd[i])
+        
+        # Terme quadratique (Eq 3.60)
+        beta_c[:, :, i] = tilde(omega_c_dot[:, i]) + tilde(omega[:, i]) @ tilde(omega[:, i])
+        
+        # Accélération linéaire sans les qdd (Eq 3.61)
+        terme_parent_alpha = alpha_c[:, h] + beta_c[:, :, h] @ d_hi[:, i]
+        alpha_c[:, i] = R_ih @ terme_parent_alpha + 2.0 * tilde(omega[:, i]) @ (psi_i * qd[i])
+
+        # --- TIROIR "M" : Préparation de la matrice de masse ---
+        for k in range(1, i + 1):
+            delta_ki = 0.0
+            if (k == i): 
+                delta_ki = 1.0
+            
+            # Impact de l'articulation k sur l'accélération angulaire de i (Eq 3.62)
+            O_M[:, i, k] = R_ih @ O_M[:, h, k] + delta_ki * phi_i
+            
+            # Impact de l'articulation k sur l'accélération linéaire de i (Eq 3.64)
+            terme_parent_A = A_M[:, h, k] + tilde(O_M[:, h, k]) @ d_hi[:, i]
+            A_M[:, i, k] = R_ih @ terme_parent_A + delta_ki * psi_i
+
+    # On renvoie tous les tableaux calculés qui serviront pour l'étape 2
+    return omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R
