@@ -1,3 +1,13 @@
+import numpy as np
+try:
+    import MBsysPy as Robotran
+except:
+    raise ImportError("MBsysPy not found/installed."
+                      "See: https://www.robotran.eu/download/how-to-install/"
+                      )
+
+
+
 def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData): 
     """
         Etape 1: Parcourt l'arbre de la base vers les feuilles
@@ -67,3 +77,171 @@ def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData):
 
     # On renvoie tous les tableaux calculés qui serviront pour l'étape 2
     return omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R
+
+
+
+
+
+
+
+
+def define_topology():
+    """
+    Definition de la topologie sur base du pad robotran nécessaires au formalisme NER (inbody, phi(joint rotation), psy (joint translation), d_hi, masse, l_ci, Inertie).
+    Les vecteurs sont structurés pour un accès via var[i] = [x, y, z].
+    L'index est le corps (fictif ou non associé au valeur)
+    Le premier corps est la base (index 0) (Pas de parent)
+    """
+    inbody_name_list = ["base", "R3_Pole", "R1_Pole", "R2_Pole", "R2_arm_pend1", "R2_cardan1", "R1_cardan1", "R2_arm_pend2", "T1_effort_normal", "T3_effort_tranchant", "R2_effort_flechissant", "arm_pend4", "R_cardan4a", "R_cardan4b", "arm_pend3", "R_cardan3a", "R_cardan3b", "arm_pend2", "R_cardan2a", "R_cardan2b"]
+    
+    inbody_list = np.array([None, 0, 0, 0, 0, 1, 1, 0, 3, 3, 3, 4, 5, 5, 0, 7, 7, 0, 9, 9])
+    
+    phi_list = [
+        None,                           # 0: base
+        np.array([1, 0, 0]),           # 1: R3_Pole (first rotation around X)
+        np.array([1, 0, 0]),           # 2: R1_Pole (rotation around X)
+        np.array([0, 1, 0]),           # 3: R2_Pole (rotation around Y)
+        np.array([0, 1, 0]),           # 4: R2_arm_pend1 (rotation around Y)
+        np.array([0, 1, 0]),           # 5: R2_cardan1 (rotation around Y)
+        np.array([1, 0, 0]),           # 6: R1_cardan1 (rotation around X)
+        np.array([0, 0, 0]),           # 7: R2_arm_pend2 (T1 joint - translation)
+        np.array([0, 0, 0]),           # 8: T1_effort_normal (translation joint)
+        np.array([0, 0, 0]),           # 9: T3_effort_tranchant (translation joint)
+        np.array([0, 1, 0]),           # 10: R2_effort_flechissant (rotation around Y)
+        np.array([1, 0, 0]),           # 11: arm_pend4 (rotation around X)
+        np.array([1, 0, 0]),           # 12: R_cardan4a (rotation around X)
+        np.array([0, 1, 0]),           # 13: R_cardan4b (rotation around Y)
+        np.array([0, 1, 0]),           # 14: arm_pend3 (rotation around Y)
+        np.array([0, 1, 0]),           # 15: R_cardan3a (rotation around Y)
+        np.array([1, 0, 0]),           # 16: R_cardan3b (rotation around X)
+        np.array([1, 0, 0]),           # 17: arm_pend2 (rotation around X)
+        np.array([1, 0, 0]),           # 18: R_cardan2a (rotation around X)
+        np.array([0, 1, 0]),           # 19: R_cardan2b (rotation around Y)
+    ]
+    
+    psi_list = [
+        None,                           # 0: base
+        np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
+        np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
+        np.array([0, 0, 0]),           # 3: R2_Pole (no translation)
+        np.array([0, 0, 0]),           # 4: R2_arm_pend1 (no translation)
+        np.array([0, 0, 0]),           # 5: R2_cardan1 (no translation)
+        np.array([0, 0, 0]),           # 6: R1_cardan1 (no translation)
+        np.array([1, 0, 0]),           # 7: R2_arm_pend2 (T1 translation along X)
+        np.array([1, 0, 0]),           # 8: T1_effort_normal (translation along X)
+        np.array([0, 0, 1]),           # 9: T3_effort_tranchant (translation along Z)
+        np.array([0, 0, 0]),           # 10: R2_effort_flechissant (no translation)
+        np.array([0, 0, 0]),           # 11: arm_pend4 (no translation)
+        np.array([0, 0, 0]),           # 12: R_cardan4a (no translation)
+        np.array([0, 0, 0]),           # 13: R_cardan4b (no translation)
+        np.array([0, 0, 0]),           # 14: arm_pend3 (no translation)
+        np.array([0, 0, 0]),           # 15: R_cardan3a (no translation)
+        np.array([0, 0, 0]),           # 16: R_cardan3b (no translation)
+        np.array([0, 0, 0]),           # 17: arm_pend2 (no translation)
+        np.array([0, 0, 0]),           # 18: R_cardan2a (no translation)
+        np.array([0, 0, 0]),           # 19: R_cardan2b (no translation)
+    ]
+    
+    d_hi_list = [
+        None,                           # 0: base
+        np.array([0, 0, 0]),           # 1: R3_Pole
+        np.array([0, 0, 0]),           # 2: R1_Pole
+        np.array([0, 0, 0]),           # 3: R2_Pole
+        np.array([0, 0, 0]),           # 4: R2_arm_pend1
+        np.array([0, 0, 0]),           # 5: R2_cardan1
+        np.array([0, 0, 0]),           # 6: R1_cardan1
+        np.array([0, 0, 0]),           # 7: R2_arm_pend2
+        np.array([0, 0, 0]),           # 8: T1_effort_normal
+        np.array([0, 0, 0]),           # 9: T3_effort_tranchant
+        np.array([0, 0, 0]),           # 10: R2_effort_flechissant
+        np.array([0, 0, 0]),           # 11: arm_pend4
+        np.array([0, 0, 0]),           # 12: R_cardan4a
+        np.array([0, 0, 0]),           # 13: R_cardan4b
+        np.array([0, 0, 0]),           # 14: arm_pend3
+        np.array([0, 0, 0]),           # 15: R_cardan3a
+        np.array([0, 0, 0]),           # 16: R_cardan3b
+        np.array([0, 0, 0]),           # 17: arm_pend2
+        np.array([0, 0, 0]),           # 18: R_cardan2a
+        np.array([0, 0, 0]),           # 19: R_cardan2b
+    ]
+    
+    m_list = [
+        0.0,                            # 0: base
+        600.0,                          # 1: R3_Pole (mass of Pole)
+        600.0,                          # 2: R1_Pole
+        600.0,                          # 3: R2_Pole
+        44.0,                           # 4: R2_arm_pend1 (mass of Pendule1)
+        123.3,                          # 5: R2_cardan1 (mass of nacelle1)
+        123.3,                          # 6: R1_cardan1
+        30.0,                           # 7: R2_arm_pend2 (mass of arm_part1)
+        0.0,                            # 8: T1_effort_normal (mass of arm_part2)
+        0.0,                            # 9: T3_effort_tranchant
+        0.0,                            # 10: R2_effort_flechissant
+        44.0,                           # 11: arm_pend4 (mass of Pendule4)
+        123.3,                          # 12: R_cardan4a (mass of nacelle4)
+        123.3,                          # 13: R_cardan4b
+        44.0,                           # 14: arm_pend3 (mass of Pendule3)
+        123.3,                          # 15: R_cardan3a (mass of nacelle3)
+        123.3,                          # 16: R_cardan3b
+        44.0,                           # 17: arm_pend2 (mass of Pendule2)
+        123.3,                          # 18: R_cardan2a (mass of nacelle2)
+        123.3,                          # 19: R_cardan2b
+    ]
+    
+    l_ci_list = [
+        np.array([0.0, 0.0, 0.0]),     # 0: base
+        np.array([0.0, 0.0, 2.0]),     # 1: R3_Pole (COM of Pole)
+        np.array([0.0, 0.0, 2.0]),     # 2: R1_Pole
+        np.array([0.0, 0.0, 2.0]),     # 3: R2_Pole
+        np.array([0.0, 0.0, -1.5]),    # 4: R2_arm_pend1 (COM of Pendule1)
+        np.array([0.0, 0.0, -1.0]),    # 5: R2_cardan1 (COM of nacelle1)
+        np.array([0.0, 0.0, -1.0]),    # 6: R1_cardan1
+        np.array([-0.5, 0.0, 0.0]),    # 7: R2_arm_pend2 (COM of arm_part1)
+        np.array([0.0, 0.0, 0.0]),     # 8: T1_effort_normal (COM of arm_part2)
+        np.array([0.0, 0.0, 0.0]),     # 9: T3_effort_tranchant
+        np.array([0.0, 0.0, 0.0]),     # 10: R2_effort_flechissant
+        np.array([0.0, 0.0, -1.5]),    # 11: arm_pend4 (COM of Pendule4)
+        np.array([0.0, 0.0, -1.0]),    # 12: R_cardan4a (COM of nacelle4)
+        np.array([0.0, 0.0, -1.0]),    # 13: R_cardan4b
+        np.array([0.0, 0.0, -1.5]),    # 14: arm_pend3 (COM of Pendule3)
+        np.array([0.0, 0.0, -1.0]),    # 15: R_cardan3a (COM of nacelle3)
+        np.array([0.0, 0.0, -1.0]),    # 16: R_cardan3b
+        np.array([0.0, 0.0, -1.5]),    # 17: arm_pend2 (COM of Pendule2)
+        np.array([0.0, 0.0, -1.0]),    # 18: R_cardan2a (COM of nacelle2)
+        np.array([0.0, 0.0, -1.0]),    # 19: R_cardan2b
+    ]
+    
+    I_list = [
+        np.zeros((3, 3)),               # 0: base
+        np.diag([458.8, 458.8, 16.0]),  # 1: R3_Pole (Inertia of Pole)
+        np.diag([458.8, 458.8, 16.0]),  # 2: R1_Pole
+        np.diag([458.8, 458.8, 16.0]),  # 3: R2_Pole
+        np.diag([15.9, 15.9, 0.091]),   # 4: R2_arm_pend1 (Inertia of Pendule1)
+        np.diag([15.4, 15.4, 61.7]),    # 5: R2_cardan1 (Inertia of nacelle1)
+        np.diag([15.4, 15.4, 61.7]),    # 6: R1_cardan1
+        np.diag([1.0, 1.0, 1.0]),       # 7: R2_arm_pend2 (Inertia of arm_part1)
+        np.zeros((3, 3)),               # 8: T1_effort_normal (Inertia of arm_part2)
+        np.zeros((3, 3)),               # 9: T3_effort_tranchant
+        np.zeros((3, 3)),               # 10: R2_effort_flechissant
+        np.diag([15.9, 15.9, 0.091]),   # 11: arm_pend4 (Inertia of Pendule4)
+        np.diag([15.4, 15.4, 61.7]),    # 12: R_cardan4a (Inertia of nacelle4)
+        np.diag([15.4, 15.4, 61.7]),    # 13: R_cardan4b
+        np.diag([15.9, 15.9, 0.091]),   # 14: arm_pend3 (Inertia of Pendule3)
+        np.diag([15.4, 15.4, 61.7]),    # 15: R_cardan3a (Inertia of nacelle3)
+        np.diag([15.4, 15.4, 61.7]),    # 16: R_cardan3b
+        np.diag([15.9, 15.9, 0.091]),   # 17: arm_pend2 (Inertia of Pendule2)
+        np.diag([15.4, 15.4, 61.7]),    # 18: R_cardan2a (Inertia of nacelle2)
+        np.diag([15.4, 15.4, 61.7]),    # 19: R_cardan2b
+    ]
+    
+    topology = {
+        # Topologie
+        "inbody": np.array(inbody_list),             # Taille: (n+1,)
+        "phi":    np.array(phi_list, dtype=object),  # Taille: (n+1, 3) --> phi[i] = [x,y,z]
+        "psi":    np.array(psi_list, dtype=object),  # Taille: (n+1, 3) --> psi[i] = [x,y,z]
+        "d_hi":   np.array(d_hi_list, dtype=object), # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
+        # Dynamique
+        "m":      np.array(m_list),                  # Taille: (n+1,)     --> m[i] = scalaire
+        "l_ci":   np.array(l_ci_list, dtype=object), # Taille: (n+1, 3) --> l_ci[i] = [x,y,z]
+        "I":      np.array(I_list, dtype=object)    # Taille: (n+1, 3, 3)--> I[i] = matrice 3x3
+    }

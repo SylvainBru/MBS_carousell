@@ -10,7 +10,7 @@
 #
 #	http://www.robotran.be 
 #
-#	==> Generation Date: Tue Apr  7 15:28:19 2026
+#	==> Generation Date: Tue Apr 14 11:47:41 2026
 #	==> using automatic loading with extension .mbs 
 #
 #	==> Project name: Merry_go_round
@@ -337,9 +337,12 @@ def invdyna(phi,s,tsim):
     Cq211 = -s.trq[2,11]+s.In[1,11]*OM111*OM311+s.In[5,11]*OMp211-s.In[9,11]*OM111*OM311+Cq213*C12-Cq312*S12+Fq112* \
  	  s.dpt[3,9]+Fs111*s.l[3,11]
     Cq311 = -s.trq[3,11]-s.In[1,11]*OM111*OM211+s.In[5,11]*OM111*OM211+s.In[9,11]*OMp311+Cq213*S12+Cq312*C12
-    Fq110 = -s.frc[1,10]+Fq111
-    Fq210 = -s.frc[2,10]+Fq211*C11-Fq311*S11
-    Fq310 = -s.frc[3,10]+Fq211*S11+Fq311*C11
+    Fs110 = -s.frc[1,10]+s.m[10]*ALPHA110
+    Fs210 = -s.frc[2,10]+s.m[10]*ALPHA29
+    Fs310 = -s.frc[3,10]+s.m[10]*ALPHA310
+    Fq110 = Fq111+Fs110
+    Fq210 = Fs210+Fq211*C11-Fq311*S11
+    Fq310 = Fs310+Fq211*S11+Fq311*C11
     Cq110 = -s.trq[1,10]+Cq111
     Cq210 = -s.trq[2,10]+Cq211*C11-Cq311*S11
     Cq310 = -s.trq[3,10]+Cq211*S11+Cq311*C11
