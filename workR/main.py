@@ -50,6 +50,8 @@ mbs_data = Robotran.MbsData(mbs_path)
 q0 = mbs_data.q0
 qd0 = mbs_data.qd0
 
+print(mbs_data.g)
+
 #omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R = neri.forward_kinematics(q0, qd0, topology, mbs_data)
 
 #print(topology["inbody"])

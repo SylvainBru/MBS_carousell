@@ -40,7 +40,7 @@ def user_JointForces(mbs_data, tsim):
     #print(mbs_data.Qq[1:])
 
     # Index du joint de rotation principale du pôle
-    joint_pole = mbs_data.joint_id['Pole3']  # nom à adapter
+    joint_pole = mbs_data.joint_id['R3_Pole']  # nom à adapter
 
     # Vitesse angulaire actuelle du pôle
     omega_pole = mbs_data.qd[joint_pole]
@@ -97,8 +97,8 @@ def user_JointForces(mbs_data, tsim):
     q_init = 75.0 * np.pi / 180.0 # [cite: 175, 186]
 
     # IDs des articulations (déjà définis dans ton code)
-    hinge_pend1 = mbs_data.joint_id['arm_pend1']
-    hinge_pend2 = mbs_data.joint_id['arm_pend2']
+    hinge_pend1 = mbs_data.joint_id['R2_arm_pend1']
+    hinge_pend2 = mbs_data.joint_id['R2_arm_pend2']
     hinge_pend3 = mbs_data.joint_id['arm_pend3']
     hinge_pend4 = mbs_data.joint_id['arm_pend4']
 
@@ -129,7 +129,7 @@ def user_JointForces(mbs_data, tsim):
     D_cardan = 6.0
 
     cardan_joints = [
-        'R_cardan1a', 'R_cardan1b',  # nacelle 1
+        'R2_cardan1', 'R1_cardan1',  # nacelle 1
         'R_cardan2a', 'R_cardan2b',  # nacelle 2
         'R_cardan3a', 'R_cardan3b',  # nacelle 3
         'R_cardan4a', 'R_cardan4b',  # nacelle 4

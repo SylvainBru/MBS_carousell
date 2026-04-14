@@ -34,8 +34,8 @@ def user_DrivenJoints(mbs_data, tsim):
     phi1 = np.pi/2  # phase of the oscillation (rad)
     phi2 = 0  # phase of the oscillation (rad)
 
-    theta1 = mbs_data.joint_id['Pole1']  # name of the joint to be driven
-    theta2 = mbs_data.joint_id['Pole2']  # name of the joint to be driven
+    theta1 = mbs_data.joint_id['R1_Pole']  # name of the joint to be driven
+    theta2 = mbs_data.joint_id['R2_Pole']  # name of the joint to be driven
 
     mbs_data.q[theta1] = A*(1 - np.cos(w*tsim + phi1))
     mbs_data.qd[theta1] = A*w*np.sin(w*tsim + phi1)

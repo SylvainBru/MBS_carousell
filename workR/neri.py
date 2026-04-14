@@ -268,6 +268,10 @@ def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData):
     O_M = np.zeros((N_body + 1, N_body + 1, 3))
     A_M = np.zeros((N_body + 1, N_body + 1, 3))
 
+    #Condition initial
+
+    alpha_c[0] = np.array([mbs_data])  
+
     for i in range(1, N_body): 
         h = inbody[i]
 
