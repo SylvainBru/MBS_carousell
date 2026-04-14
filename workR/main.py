@@ -45,14 +45,14 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 mbs_path = os.path.join(script_dir, '..', 'dataR', 'Merry_go_round.mbs')
 mbs_data = Robotran.MbsData(mbs_path)
 
-#topology = neri.extract_topology_from_mbs(mbs_path)
+topology = neri.define_topology()
 
 q0 = mbs_data.q0
 qd0 = mbs_data.qd0
 
 print(mbs_data.g)
 
-#omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R = neri.forward_kinematics(q0, qd0, topology, mbs_data)
+omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R = neri.forward_kinematics(q0, qd0, topology, mbs_data)
 
 #print(topology["inbody"])
 #print(topology["phi"])

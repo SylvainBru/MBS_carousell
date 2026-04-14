@@ -38,7 +38,7 @@ def define_topology():
     np.array([1, 0, 0]),           # 16: R_cardan3b 
     np.array([1, 0, 0]),           # 17: arm_pend2 
     np.array([1, 0, 0]),           # 18: R_cardan2a 
-    np.array([0, 1, 0]),           # 19: R_cardan2b 
+    np.array([0, 1, 0])           # 19: R_cardan2b 
     ]
 
 
@@ -62,7 +62,7 @@ def define_topology():
     np.array([0, 0, 0]),           # 16: R_cardan3b (no translation)
     np.array([0, 0, 0]),           # 17: arm_pend2 (no translation)
     np.array([0, 0, 0]),           # 18: R_cardan2a (no translation)
-    np.array([0, 0, 0]),           # 19: R_cardan2b (no translation)
+    np.array([0, 0, 0])            # 19: R_cardan2b (no translation)
     ]
 
     d_hi_list = [
@@ -85,7 +85,7 @@ def define_topology():
     np.array([0, 0, -1]),           # 16: R_cardan3b (no translation)
     np.array([0, 0, -3]),           # 17: arm_pend2 (no translation)
     np.array([0, 0, 0]),           # 18: R_cardan2a (no translation)
-    np.array([0, 0, -1]),           # 19: R_cardan2b (no translation)
+    np.array([0, 0, -1])            # 19: R_cardan2b (no translation)
     ]
 
     z_list = [
@@ -108,7 +108,7 @@ def define_topology():
     np.array([0, 0, 0]),           # 16: R_cardan3b (no translation)
     np.array([0, 0, 0]),           # 17: arm_pend2 (no translation)
     np.array([0, 0, 0]),           # 18: R_cardan2a (no translation)
-    np.array([0, 0, 0]),           # 19: R_cardan2b (no translation)
+    np.array([0, 0, 0])            # 19: R_cardan2b (no translation)
     ]
     
     m_list = [
@@ -131,7 +131,7 @@ def define_topology():
     123.3,                          # 16: R_cardan3b
     44.0,                           # 17: arm_pend2 (mass of Pendule2)
     123.3,                          # 18: R_cardan2a (mass of nacelle2)
-    123.3,                          # 19: R_cardan2b
+    123.3                           # 19: R_cardan2b
     ]
 
 
@@ -155,7 +155,7 @@ def define_topology():
     np.array([0.0, 0.0, -1.0]),    # 16: R_cardan3b
     np.array([0.0, 0.0, -1.5]),    # 17: arm_pend2 (COM of Pendule2)
     np.array([0.0, 0.0, -1.0]),    # 18: R_cardan2a (COM of nacelle2)
-    np.array([0.0, 0.0, -1.0]),    # 19: R_cardan2b
+    np.array([0.0, 0.0, -1.0])     # 19: R_cardan2b
     ]
 
 
@@ -179,7 +179,7 @@ def define_topology():
     np.diag([15.4, 15.4, 61.7]),    # 16: R_cardan3b
     np.diag([15.9, 15.9, 0.091]),   # 17: arm_pend2 (Inertia of Pendule2)
     np.diag([15.4, 15.4, 61.7]),    # 18: R_cardan2a (Inertia of nacelle2)
-    np.diag([15.4, 15.4, 61.7]),    # 19: R_cardan2b
+    np.diag([15.4, 15.4, 61.7])     # 19: R_cardan2b
     ]
 
 
@@ -216,30 +216,34 @@ def tilde(v):
     ])
 
 
-def rotation_matrix(axis, angle):
+def rotation_matrix(phi, psi, q):
     """
     Calcule la matrice de rotation autour d'un axe local (x, y ou z).
+
+    Si phi = [ 0, 0, 0] et psi = [ 0, 0, 0] alors return Identité 
+    Si phi != [0 , 0, 0] alors il y a une rotation 
     """
-    if np.allclose(axis, 0): # Si c'est une translation, pas de rotation
-        return np.eye(3)
-        
-    c = np.cos(angle)
-    s = np.sin(angle)
     
-    if axis[0] == 1.0:   # Autour de X
-        return np.array([[1, 0, 0], 
-                         [0, c, -s], 
-                         [0, s, c]])
-    elif axis[1] == 1.0: # Autour de Y
-        return np.array([[c, 0, s], 
-                         [0, 1, 0], 
-                         [-s, 0, c]])
-    elif axis[2] == 1.0: # Autour de Z
-        return np.array([[c, -s, 0], 
-                         [s, c, 0], 
-                         [0, 0, 1]])
-    else:
+        
+    c = np.cos(q)
+    s = np.sin(q)
+
+    if phi == np.zeros(3): 
         return np.eye(3)
+    else:  
+        if phi[0] == 1.0:   # Autour de X
+            return np.array([[1, 0, 0], 
+                            [0, c, -s], 
+                            [0, s, c]])
+        elif phi[1] == 1.0: # Autour de Y
+            return np.array([[c, 0, -s], 
+                            [0, 1, 0], 
+                            [s, 0, c]])
+        elif phi[2] == 1.0: # Autour de Z
+            return np.array([[c, -s, 0], 
+                            [s, c, 0], 
+                            [0, 0, 1]])
+
 
 ######################################################
 ####             NERi Formalism                 ######
@@ -265,15 +269,31 @@ def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData):
     beta_c      = np.zeros((N_body + 1, 3))
     R           = np.zeros((N_body + 1, 3, 3)) # Matrices de rotation R^{i,h}
 
-    O_M = np.zeros((N_body + 1, N_body + 1, 3))
+    print(R)
+
+    O_M = np.zeros((N_body + 1, N_body + 1, 3))  # matrice de taille N * N ou chaque termes est un vecteur de taille 3
     A_M = np.zeros((N_body + 1, N_body + 1, 3))
 
     #Condition initial
 
-    alpha_c[0] = np.array([mbs_data])  
+    alpha_c[0]  = mbs_data.g[1:4] # [0, 0, -9.81]
+
+    #les conditions initial mis à 0 sont fait par le np.zeros
+
+    #Note: Attention q[i] pour la matrice de rotation si c'est une translation R = I
 
     for i in range(1, N_body): 
         h = inbody[i]
+        R_ih = rotation_matrix(phi[i], psi[i], q[i])
+        omega_i_tilted = tilde(omega[i])
+
+        omega[i] = R_ih @ omega[h] + phi[i] * qd[i]
+        omega_c_dot = R_ih @ omega_c_dot + omega_i_tilted @ phi[i] * qd[i]
+        beta_c[i] = 
+        alpha_c[i] = 
+
+        for k in range (1, i): 
+            
 
 
 
