@@ -19,7 +19,7 @@ def define_topology():
     inbody_list = np.array([None, 0, 1, 2, 3, 4, 5, 3, 7, 8, 9, 10, 11, 12, 3, 14, 15, 3, 17, 18])
 
     phi_list = [
-    None,                           # 0: base
+    np.array([None, None, None]),  # 0: base
     np.array([0, 0, 1]),           # 1: R3_Pole 
     np.array([1, 0, 0]),           # 2: R1_Pole
     np.array([0, 1, 0]),           # 3: R2_Pole 
@@ -43,7 +43,7 @@ def define_topology():
 
 
     psi_list = [
-    None,                           # 0: base
+    np.array([None, None, None]),                           # 0: base
     np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
     np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
     np.array([0, 0, 0]),           # 3: R2_Pole (no translation)
@@ -66,7 +66,7 @@ def define_topology():
     ]
 
     d_hi_list = [
-    None,                           # 0: base
+    np.array([None, None, None]),                           # 0: base
     np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
     np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
     np.array([1, 0, 4.5]),           # 3: R2_Pole (no translation)
@@ -89,7 +89,7 @@ def define_topology():
     ]
 
     z_list = [
-    None,                           # 0: base
+    np.array([None, None, None]),                           # 0: base
     np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
     np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
     np.array([0, 0, 0]),           # 3: R2_Pole (no translation)
@@ -230,7 +230,7 @@ def rotation_matrix(phi, psi, q):
     c = np.cos(q)
     s = np.sin(q)
 
-    if phi == np.zeros(3): 
+    if phi is None or np.array_equal(phi, np.zeros(3)): 
         return np.eye(3)
     else:  
         if phi[0] == 1.0:   # Autour de X
@@ -342,17 +342,26 @@ def backward_dynamics(q, mbs_data: Robotran.MbsData, topology, omega, omega_c_do
     F_c = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
     L_c = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
 
-    sum_F_children = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
-    sum_L_children = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
+    W_M = np.zeros((N_body + 1, N_body + 1, 3))#Matrice de taille NxN contenant des vecteurs 3x1
+    F_M = np.zeros((N_body + 1, N_body + 1, 3))#Matrice de taille NxN contenant des vecteurs 3x1
+    L_M = np.zeros((N_body + 1, N_body + 1, 3))#Matrice de taille NxN contenant des vecteurs 3x1
+    
+
+    sum_F_c_children = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
+    sum_L_c_children = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
+    sum_F_M_children = np.zeros((N_body + 1, N_body + 1, 3))#Matrice de taille NxN contenant des vecteurs 3x1
+    sum_L_M_children = np.zeros((N_body + 1, N_body + 1, 3))#Matrice de taille NxN contenant des vecteurs 3x1
 
     for i in range(N_body, 0, -1):  # La boucle s'arrète à i = 1 et on parcourt à l'envers (de la feuille vers la base)
         W_c[i] = m[i] * (alpha_c[i] + beta_c[i] @ (z[i] + d_ii[i])) - F_ext[i]
-        F_c[i] = sum_F_children[i] + W_c[i]
-        L_c[i] = sum_L_children[i] + tilde(z[i] + d_ii[i]) @ W_c[i] - L_ext[i] + I[i] @ omega_c_dot[i] + tilde(omega[i]) @ I[i] @ omega[i]
+        F_c[i] = sum_F_c_children[i] + W_c[i]
+        L_c[i] = sum_L_c_children[i] + tilde(z[i] + d_ii[i]) @ W_c[i] - L_ext[i] + I[i] @ omega_c_dot[i] + tilde(omega[i]) @ I[i] @ omega[i]
 
-
-
-
+        for k in range(1, i + 1): 
+            W_M[i][k] = m[i] * (A_M[i][k] + O_M[i][k] @ (z[i] + d_ii[i]))
+            F_M[i][k] = sum_F_M_children[i][k] + W_M[i][k]
+            L_M[i][k] = sum_L_M_children[i][k] + tilde(z[i] + d_ii[i])
+        
 
         #Logique pour stocker les données des sommes de
         h = inbody[i]
@@ -362,7 +371,7 @@ def backward_dynamics(q, mbs_data: Robotran.MbsData, topology, omega, omega_c_do
             L_push_c = R_hi @ L_c[i] + tilde(z[i] + d_ii[i]) @ R_hi @ F_c[i]
 
 
-            sum_F_children[h] += F_push_c
+            #sum_F_children[h] += F_push_c 
 
     Q = 0.0
     return Q
