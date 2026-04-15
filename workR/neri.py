@@ -192,6 +192,8 @@ def define_topology():
         "phi":    np.array(phi_list),                # Taille: (n+1, 3) --> phi[i] = [x,y,z]
         "psi":    np.array(psi_list),                # Taille: (n+1, 3) --> psi[i] = [x,y,z]
         "d_hi":   np.array(d_hi_list),               # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
+        "z":      np.array(z_list),                  # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
+
         # Dynamique
         "m":      np.array(m_list),                  # Taille: (n+1,)     --> m[i] = scalaire
         "d_ii":   np.array(d_ii_list),               # Taille: (n+1, 3) --> d_ii[i] = [x,y,z]
@@ -261,15 +263,15 @@ def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData):
     phi    = topology["phi"]
     psi    = topology["psi"]
     d_hi   = topology["d_hi"]
+    z      = topology["z"]
 
     #Allocations mémoires (taille n+1 pour inclure la base à l'index 0)
-    omega       = np.zeros((N_body + 1, 3))
-    omega_c_dot = np.zeros((N_body + 1, 3))
-    alpha_c     = np.zeros((N_body + 1, 3))
-    beta_c      = np.zeros((N_body + 1, 3))
-    R           = np.zeros((N_body + 1, 3, 3)) # Matrices de rotation R^{i,h}
+    omega       = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
+    omega_c_dot = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
+    alpha_c     = np.zeros((N_body + 1, 3)) #liste de vecteur 3x1
+    beta_c      = np.zeros((N_body + 1, 3, 3)) #Liste de matrice 3x3
+    #R           = np.zeros((N_body + 1, 3, 3)) # Matrices de rotation R^{i,h}
 
-    print(R)
 
     O_M = np.zeros((N_body + 1, N_body + 1, 3))  # matrice de taille N * N ou chaque termes est un vecteur de taille 3
     A_M = np.zeros((N_body + 1, N_body + 1, 3))
@@ -278,29 +280,36 @@ def forward_kinematics(q, qd, topology, mbs_data: Robotran.MbsData):
 
     alpha_c[0]  = mbs_data.g[1:4] # [0, 0, -9.81]
 
-    #les conditions initial mis à 0 sont fait par le np.zeros
+    #les autres conditions initial mis à 0 sont fait par le np.zeros
 
     #Note: Attention q[i] pour la matrice de rotation si c'est une translation R = I
 
     for i in range(1, N_body): 
         h = inbody[i]
         R_ih = rotation_matrix(phi[i], psi[i], q[i])
-        omega_i_tilted = tilde(omega[i])
+        
 
         omega[i] = R_ih @ omega[h] + phi[i] * qd[i]
-        omega_c_dot = R_ih @ omega_c_dot + omega_i_tilted @ phi[i] * qd[i]
-        beta_c[i] = 
-        alpha_c[i] = 
+        omega_i_tilted = tilde(omega[i])
+
+        omega_c_dot[i] = R_ih @ omega_c_dot[h] + omega_i_tilted @ phi[i] * qd[i]
+        omega_i_c_dot_tilted = tilde(omega_c_dot[i])
+
+        beta_c[i] = omega_i_c_dot_tilted + omega_i_tilted @ omega_i_tilted
+        alpha_c[i] = R_ih @ (alpha_c[h] + beta_c[h] @ (z[h] + d_hi[i])) + 2 * omega_i_tilted @ psi[i] * qd[i]
 
         for k in range (1, i): 
+            delta_ki = 0; 
+            if(k == i): 
+                delta_ki = 1; 
             
+            O_M[i][k] = R_ih @ O_M[h][k] + delta_ki * phi[i]
+            A_M[i][k] = R_ih @ (A_M[h][k] + tilde(O_M[h][k]) @ (z[h] + d_hi[i])) + delta_ki * psi[i]
+
+    return omega, omega_c_dot, alpha_c, beta_c, O_M, A_M
 
 
-
-    return omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R
-
-
-def backward_dynamics(q, qd, qdd, mbs_data, omega, omega_d, alpha): 
+def backward_dynamics(q, mbs_data: Robotran.MbsData, omega, omega_c_dot, alpha_c, beta_c, O_M, A_M): 
     """
     Etape 2: Parcourt de l'arbre des feuilles vers la base 
     Calcule les forces et couples aux articulations, et projette pour obtenir Q. 
