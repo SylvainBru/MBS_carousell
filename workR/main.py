@@ -46,36 +46,35 @@ mbs_path = os.path.join(script_dir, '..', 'dataR', 'Merry_go_round.mbs')
 mbs_data = Robotran.MbsData(mbs_path)
 
 topology = neri.define_topology()
+neri.check_topology_lengths(topology)  #Pour vérifier qu'on a bien le bon nombre de corps
 
-q0 = mbs_data.q0
-qd0 = mbs_data.qd0
+#Condition initial (l'indice 0 contient le nombre de joints )
+q0 = mbs_data.q0[1:]
+qd0 = mbs_data.qd0[1:]
 
-print(mbs_data.g)
 
-omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R = neri.forward_kinematics(q0, qd0, topology, mbs_data)
+#omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R = neri.forward_kinematics(q0, qd0, topology, mbs_data)
 
 #print(topology["inbody"])
 #print(topology["phi"])
 #print(topology["m"])
 
 
-# %%===========================================================================
-# Partitionning
-# =============================================================================
-mbs_data.process = 1
-mbs_part = Robotran.MbsPart(mbs_data)
-mbs_part.set_options(rowperm=1, verbose=1)
-mbs_part.run()
+# # %%===========================================================================
+# # Partitionning
+# # =============================================================================
+# mbs_data.process = 1
+# mbs_part = Robotran.MbsPart(mbs_data)
+# mbs_part.set_options(rowperm=1, verbose=1)
+# mbs_part.run()
 
-# %%===========================================================================
-# Direct Dynamics
-# =============================================================================
-mbs_data.process = 3
-mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
-mbs_dirdyn.set_options(dt0=1e-3, tf=5, save2file=1)
-results = mbs_dirdyn.run()
-
-
+# # %%===========================================================================
+# # Direct Dynamics
+# # =============================================================================
+# mbs_data.process = 3
+# mbs_dirdyn = Robotran.MbsDirdyn(mbs_data)
+# mbs_dirdyn.set_options(dt0=1e-3, tf=5, save2file=1)
+# results = mbs_dirdyn.run()
 
 # %%===========================================================================
 # Plotting results
