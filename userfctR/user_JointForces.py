@@ -116,7 +116,7 @@ def user_JointForces(mbs_data, tsim):
         torque_damping = -(d_hinge + D_rot_eq) * mbs_data.qd[h_id]
         torque_stiffness = -K_rot_eq * (mbs_data.q[h_id] - q_init)
 
-        if(h_id in [hinge_pend2, hinge_pend4]): 
+        if(h_id in [ hinge_pend2, hinge_pend4]): 
             T_precharge = - T_precharge
         
         mbs_data.Qq[h_id] += torque_damping + torque_stiffness + T_precharge

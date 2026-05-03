@@ -46,18 +46,25 @@ mbs_path = os.path.join(script_dir, '..', 'dataR', 'Merry_go_round.mbs')
 mbs_data = Robotran.MbsData(mbs_path)
 
 topology = neri.define_topology()
-neri.check_topology_lengths(topology)  #Pour vérifier qu'on a bien le bon nombre de corps
+#neri.check_topology_lengths(topology)  #Pour vérifier qu'on a bien le bon nombre de corps
+
 
 #Condition initial (l'indice 0 contient le nombre de joints )
 q0 = mbs_data.q0[1:]
 qd0 = mbs_data.qd0[1:]
 
-
+print("independant id: " + str(mbs_data.qu))
+print("Driven id: " + str(mbs_data.qc))
 #omega, omega_c_dot, alpha_c, beta_c, O_M, A_M, R = neri.forward_kinematics(q0, qd0, topology, mbs_data)
 
 #print(topology["inbody"])
 #print(topology["phi"])
 #print(topology["m"])
+
+t0 = 0.0
+t1 = 3.0
+
+neri.compute_dynamic_response(mbs_data, topology, t0, t1)
 
 
 # # %%===========================================================================

@@ -570,7 +570,7 @@
       </parent>
       <joint>
         <jointname>R2_arm_pend2</jointname>
-        <type>T1</type>
+        <type>R2</type>
         <nature>driven</nature>
         <symbols>
           <q />
