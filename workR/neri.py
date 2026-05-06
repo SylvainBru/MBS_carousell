@@ -19,7 +19,7 @@ def define_topology():
     inbody_list = np.array([None, 0, 1, 2, 3, 4, 5, 3, 7, 8, 9, 10, 11, 12, 3, 14, 15, 3, 17, 18])
 
     phi_list = [
-    np.array([None, None, None]),  # 0: base
+    np.array([0.0, 0.0, 0.0]),  # 0: base
     np.array([0, 0, 1]),           # 1: R3_Pole 
     np.array([1, 0, 0]),           # 2: R1_Pole
     np.array([0, 1, 0]),           # 3: R2_Pole 
@@ -43,7 +43,7 @@ def define_topology():
 
 
     psi_list = [
-    np.array([None, None, None]),                           # 0: base
+    np.array([0.0, 0.0, 0.0]),                           # 0: base
     np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
     np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
     np.array([0, 0, 0]),           # 3: R2_Pole (no translation)
@@ -66,7 +66,7 @@ def define_topology():
     ]
 
     d_hi_list = [
-    np.array([None, None, None]),                           # 0: base
+    np.array([0.0, 0.0, 0.0]),                           # 0: base
     np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
     np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
     np.array([1, 0, 4.5]),           # 3: R2_Pole (no translation)
@@ -89,7 +89,7 @@ def define_topology():
     ]
 
     z_list = [
-    np.array([None, None, None]),                           # 0: base
+    np.array([0.0, 0.0, 0.0]),                           # 0: base
     np.array([0, 0, 0]),           # 1: R3_Pole (no translation)
     np.array([0, 0, 0]),           # 2: R1_Pole (no translation)
     np.array([0, 0, 0]),           # 3: R2_Pole (no translation)
@@ -124,61 +124,61 @@ def define_topology():
     0.0,                            # 9: T3_effort_tranchant
     0.0,                            # 10: R2_effort_flechissant
     44.0,                           # 11: arm_pend4 (mass of Pendule4)
-    123.3,                          # 12: R_cardan4a (mass of nacelle4)
+    0,                          # 12: R_cardan4a (mass of nacelle4)
     123.3,                          # 13: R_cardan4b
     44.0,                           # 14: arm_pend3 (mass of Pendule3)
-    123.3,                          # 15: R_cardan3a (mass of nacelle3)
+    0,                          # 15: R_cardan3a (mass of nacelle3)
     123.3,                          # 16: R_cardan3b
     44.0,                           # 17: arm_pend2 (mass of Pendule2)
-    123.3,                          # 18: R_cardan2a (mass of nacelle2)
+    0,                          # 18: R_cardan2a (mass of nacelle2)
     123.3                           # 19: R_cardan2b
     ]
 
 
     d_ii_list = [
     np.array([0.0, 0.0, 0.0]),     # 0: base
-    np.array([0.0, 0.0, 2.0]),     # 1: R3_Pole (COM of Pole)
-    np.array([0.0, 0.0, 2.0]),     # 2: R1_Pole
+    np.array([0.0, 0.0, 0.0]),     # 1: R3_Pole (COM of Pole)
+    np.array([0.0, 0.0, 0.0]),     # 2: R1_Pole
     np.array([0.0, 0.0, 2.0]),     # 3: R2_Pole
     np.array([0.0, 0.0, -1.5]),    # 4: R2_arm_pend1 (COM of Pendule1)
-    np.array([0.0, 0.0, -1.0]),    # 5: R2_cardan1 (COM of nacelle1)
+    np.array([0.0, 0.0, 0.0]),    # 5: R2_cardan1 (COM of nacelle1)
     np.array([0.0, 0.0, -1.0]),    # 6: R1_cardan1
     np.array([-0.5, 0.0, 0.0]),    # 7: R2_arm_pend2 (COM of arm_part1)
     np.array([0.0, 0.0, 0.0]),     # 8: T1_effort_normal (COM of arm_part2)
     np.array([0.0, 0.0, 0.0]),     # 9: T3_effort_tranchant
     np.array([0.0, 0.0, 0.0]),     # 10: R2_effort_flechissant
     np.array([0.0, 0.0, -1.5]),    # 11: arm_pend4 (COM of Pendule4)
-    np.array([0.0, 0.0, -1.0]),    # 12: R_cardan4a (COM of nacelle4)
+    np.array([0.0, 0.0, 0.0]),    # 12: R_cardan4a (COM of nacelle4)
     np.array([0.0, 0.0, -1.0]),    # 13: R_cardan4b
     np.array([0.0, 0.0, -1.5]),    # 14: arm_pend3 (COM of Pendule3)
-    np.array([0.0, 0.0, -1.0]),    # 15: R_cardan3a (COM of nacelle3)
+    np.array([0.0, 0.0, 0.0]),    # 15: R_cardan3a (COM of nacelle3)
     np.array([0.0, 0.0, -1.0]),    # 16: R_cardan3b
     np.array([0.0, 0.0, -1.5]),    # 17: arm_pend2 (COM of Pendule2)
-    np.array([0.0, 0.0, -1.0]),    # 18: R_cardan2a (COM of nacelle2)
+    np.array([0.0, 0.0, 0.0]),    # 18: R_cardan2a (COM of nacelle2)
     np.array([0.0, 0.0, -1.0])     # 19: R_cardan2b
     ]
 
 
     I_list = [
     np.zeros((3, 3)),               # 0: base
-    np.diag([458.8, 458.8, 16.0]),  # 1: R3_Pole (Inertia of Pole)
-    np.diag([458.8, 458.8, 16.0]),  # 2: R1_Pole
+    np.zeros((3, 3)),           # 1: R3_Pole (Inertia of Pole)
+    np.zeros((3, 3)),           # 2: R1_Pole
     np.diag([458.8, 458.8, 16.0]),  # 3: R2_Pole
     np.diag([15.9, 15.9, 0.091]),   # 4: R2_arm_pend1 (Inertia of Pendule1)
-    np.diag([15.4, 15.4, 61.7]),    # 5: R2_cardan1 (Inertia of nacelle1)
+    np.zeros((3, 3)),           # 5: R2_cardan1 (Inertia of nacelle1)
     np.diag([15.4, 15.4, 61.7]),    # 6: R1_cardan1
     np.diag([1.0, 1.0, 1.0]),       # 7: R2_arm_pend2 (Inertia of arm_part1)
     np.zeros((3, 3)),               # 8: T1_effort_normal (Inertia of arm_part2)
     np.zeros((3, 3)),               # 9: T3_effort_tranchant
     np.zeros((3, 3)),               # 10: R2_effort_flechissant
     np.diag([15.9, 15.9, 0.091]),   # 11: arm_pend4 (Inertia of Pendule4)
-    np.diag([15.4, 15.4, 61.7]),    # 12: R_cardan4a (Inertia of nacelle4)
+    np.zeros((3, 3)),           # 12: R_cardan4a (Inertia of nacelle4)
     np.diag([15.4, 15.4, 61.7]),    # 13: R_cardan4b
     np.diag([15.9, 15.9, 0.091]),   # 14: arm_pend3 (Inertia of Pendule3)
-    np.diag([15.4, 15.4, 61.7]),    # 15: R_cardan3a (Inertia of nacelle3)
+    np.zeros((3, 3)),           # 15: R_cardan3a (Inertia of nacelle3)
     np.diag([15.4, 15.4, 61.7]),    # 16: R_cardan3b
     np.diag([15.9, 15.9, 0.091]),   # 17: arm_pend2 (Inertia of Pendule2)
-    np.diag([15.4, 15.4, 61.7]),    # 18: R_cardan2a (Inertia of nacelle2)
+    np.zeros((3, 3)),           # 18: R_cardan2a (Inertia of nacelle2)
     np.diag([15.4, 15.4, 61.7])     # 19: R_cardan2b
     ]
 
@@ -189,209 +189,63 @@ def define_topology():
     topology = {
         # Topologie
         "inbody": np.array(inbody_list, dtype=object),             # Taille: (n+1,)
-        "phi":    np.array(phi_list, dtype=object),                # Taille: (n+1, 3) --> phi[i] = [x,y,z]
-        "psi":    np.array(psi_list, dtype=object),                # Taille: (n+1, 3) --> psi[i] = [x,y,z]
-        "d_hi":   np.array(d_hi_list, dtype=object),               # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
-        "z":      np.array(z_list, dtype=object),                  # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
+        "phi":    np.array(phi_list, dtype=float),                # Taille: (n+1, 3) --> phi[i] = [x,y,z]
+        "psi":    np.array(psi_list, dtype=float),                # Taille: (n+1, 3) --> psi[i] = [x,y,z]
+        "d_hi":   np.array(d_hi_list, dtype=float),               # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
+        "z":      np.array(z_list, dtype=float),                  # Taille: (n+1, 3) --> d_hi[i] = [x,y,z]
 
         # Dynamique
-        "m":      np.array(m_list, dtype=object),                  # Taille: (n+1,)     --> m[i] = scalaire
-        "d_ii":   np.array(d_ii_list, dtype=object),               # Taille: (n+1, 3) --> d_ii[i] = [x,y,z]
-        "I":      np.array(I_list, dtype=object)                   # Taille: (n+1, 3, 3)--> I[i] = matrice 3x3
+        "m":      np.array(m_list, dtype=float),                  # Taille: (n+1,)     --> m[i] = scalaire
+        "d_ii":   np.array(d_ii_list, dtype=float),               # Taille: (n+1, 3) --> d_ii[i] = [x,y,z]
+        "I":      np.array(I_list, dtype=float)                   # Taille: (n+1, 3, 3)--> I[i] = matrice 3x3
     }
     
     return topology
-
-
-def _xml_float(node, default=0.0):
-    if node is None or node.text is None:
-        return default
-    return float(node.text)
-
-
-def _xml_vec3(node):
-    if node is None:
-        return np.zeros(3)
-
-    coords = node.find("coordinates")
-    if coords is None:
-        coords = node
-
-    return np.array([
-        _xml_float(coords.find("x")),
-        _xml_float(coords.find("y")),
-        _xml_float(coords.find("z")),
-    ], dtype=float)
-
-
-def _joint_axis(joint_type):
+    
+def validate_topology(topology, name="topology"):
     """
-    Robotran joint type to NERi phi/psi.
-    R1,R2,R3 = rotations around x,y,z.
-    T1,T2,T3 = translations along x,y,z.
+    Print useful checks for manual topology.
     """
-    phi = np.zeros(3)
-    psi = np.zeros(3)
+    m = topology["m"]
+    d_ii = topology["d_ii"]
+    I = topology["I"]
+    joint_names = topology.get("joint_names", None)
 
-    if joint_type == "R1":
-        phi[0] = 1.0
-    elif joint_type == "R2":
-        phi[1] = 1.0
-    elif joint_type == "R3":
-        phi[2] = 1.0
-    elif joint_type == "T1":
-        psi[0] = 1.0
-    elif joint_type == "T2":
-        psi[1] = 1.0
-    elif joint_type == "T3":
-        psi[2] = 1.0
+    print(f"\n--- validate {name} ---")
 
-    return phi, psi
+    total_mass = 0.0
+
+    for i in range(1, len(m)):
+        mi = float(m[i])
+        Ii = np.array(I[i], dtype=float)
+        di = np.array(d_ii[i], dtype=float)
+
+        has_inertia = np.linalg.norm(Ii) > 1e-12
+        has_com = np.linalg.norm(di) > 1e-12
+
+        label = f"q{i}"
+        if joint_names is not None and i < len(joint_names):
+            label += f" {joint_names[i]}"
+
+        if abs(mi) > 1e-12 or has_inertia or has_com:
+            print(
+                label,
+                "m =", mi,
+                "d_ii =", di,
+                "I_diag =", np.diag(Ii),
+            )
+
+        if abs(mi) < 1e-12 and has_inertia:
+            print("  WARNING: inertia on massless joint")
+
+        if abs(mi) < 1e-12 and has_com:
+            print("  WARNING: COM offset on massless joint")
+
+        total_mass += mi
+
+    print("total mass =", total_mass)
 
 
-def define_topology_from_mbs(mbs_path):
-    """
-    Build topology automatically from the Robotran .mbs XML file.
-
-    Convention:
-    - Each Robotran joint gets one NERi index.
-    - If a body has several joints, the body mass/inertia is attached to the last joint.
-    - Intermediate joints of the same body are massless.
-    """
-
-    tree = ET.parse(mbs_path)
-    root = tree.getroot()
-
-    bodies = root.find("bodytree").findall("body")
-
-    # --------------------------------------------------
-    # First pass: collect joints in Robotran order
-    # --------------------------------------------------
-    joint_names = ["base"]
-    joint_types = [None]
-    joint_to_index = {}
-
-    body_to_last_joint = {"base": 0}
-
-    for body in bodies:
-        body_name = body.findtext("bodyname")
-        joints = body.findall("joint")
-
-        last_idx = None
-        for joint in joints:
-            jname = joint.findtext("jointname")
-            jtype = joint.findtext("type")
-
-            idx = len(joint_names)
-            joint_names.append(jname)
-            joint_types.append(jtype)
-            joint_to_index[jname] = idx
-            last_idx = idx
-
-        body_to_last_joint[body_name] = last_idx
-
-    n = len(joint_names) - 1
-
-    inbody = np.empty(n + 1, dtype=object)
-    phi = np.zeros((n + 1, 3))
-    psi = np.zeros((n + 1, 3))
-    d_hi = np.zeros((n + 1, 3))
-    m = np.zeros(n + 1)
-    d_ii = np.zeros((n + 1, 3))
-    I = np.zeros((n + 1, 3, 3))
-
-    inbody[0] = None
-
-    # --------------------------------------------------
-    # Helper: points of each body
-    # --------------------------------------------------
-    body_points = {}
-
-    for body in bodies:
-        body_name = body.findtext("bodyname")
-        points = {}
-
-        for point in body.findall("point"):
-            pname = point.findtext("pointname")
-            points[pname] = _xml_vec3(point.find("coordinates"))
-
-        body_points[body_name] = points
-
-    # --------------------------------------------------
-    # Second pass: build kinematic chain
-    # --------------------------------------------------
-    for body in bodies:
-        body_name = body.findtext("bodyname")
-        parent = body.find("parent")
-        parent_body_name = parent.findtext("bodyname")
-        parent_point_name = parent.findtext("pointname")
-
-        parent_joint_idx = body_to_last_joint[parent_body_name]
-
-        joints = body.findall("joint")
-
-        previous_idx = parent_joint_idx
-
-        for local_j, joint in enumerate(joints):
-            jname = joint.findtext("jointname")
-            jtype = joint.findtext("type")
-            idx = joint_to_index[jname]
-
-            inbody[idx] = previous_idx
-
-            phi[idx], psi[idx] = _joint_axis(jtype)
-
-            # First joint of a body sits at the selected parent point.
-            # Further joints of the same body are colocated by default.
-            if local_j == 0:
-                if parent_body_name == "base":
-                    d_hi[idx] = np.zeros(3)
-                else:
-                    d_hi[idx] = body_points[parent_body_name].get(
-                        parent_point_name,
-                        np.zeros(3)
-                    )
-            else:
-                d_hi[idx] = np.zeros(3)
-
-            previous_idx = idx
-
-        # Attach mass/inertia/COM to the last joint of this body
-        last_idx = body_to_last_joint[body_name]
-
-        mass_node = body.find("mass")
-        if mass_node is not None and mass_node.text is not None:
-            m[last_idx] = float(mass_node.text)
-
-        d_ii[last_idx] = _xml_vec3(body.find("com"))
-
-        inertia = body.find("inertia")
-        if inertia is not None:
-            ixx = _xml_float(inertia.find("Ixx"))
-            iyy = _xml_float(inertia.find("Iyy"))
-            izz = _xml_float(inertia.find("Izz"))
-            ixy = _xml_float(inertia.find("Ixy"))
-            ixz = _xml_float(inertia.find("Ixz"))
-            iyz = _xml_float(inertia.find("Iyz"))
-
-            I[last_idx] = np.array([
-                [ixx, ixy, ixz],
-                [ixy, iyy, iyz],
-                [ixz, iyz, izz],
-            ], dtype=float)
-
-    topology = {
-        "joint_names": joint_names,
-        "inbody": inbody,
-        "phi": phi,
-        "psi": psi,
-        "d_hi": d_hi,
-        "m": m,
-        "d_ii": d_ii,
-        "I": I,
-    }
-
-    return topology
 
 
 
@@ -707,7 +561,8 @@ def  ner_generique(q, qd, qdd, mbs_data,topology, F_ext=None, L_ext=None):
 
 
 def compute_qdd_u(q, qd, mbs_data, topology, u, c=None, qdd_c=None,
-                  t_current=0.0, motor_state=None):
+                  t_current=0.0, motor_state=None,
+                  use_carousel_forces=True):
     """
     Berechnet die Beschleunigungen der unabhängigen Koordinaten.
 
@@ -727,8 +582,8 @@ def compute_qdd_u(q, qd, mbs_data, topology, u, c=None, qdd_c=None,
         Qu    : reduzierter rechter Vektor vor Korrektur durch qdd_c
     """
     qdd_dummy = np.zeros_like(q)
-    F_ext, L_ext = compute_spring_damper_cartesian_forces(q, qd, mbs_data, topology)
-    M, Q = ner_generique(q, qd, qdd_dummy, mbs_data, topology, F_ext=F_ext, L_ext=L_ext)
+    #F_ext, L_ext = compute_spring_damper_cartesian_forces(q, qd, mbs_data, topology)
+    M, Q = ner_generique(q, qd, qdd_dummy, mbs_data, topology)
 
 
     Muu = M[np.ix_(u, u)]
@@ -752,19 +607,21 @@ def compute_qdd_u(q, qd, mbs_data, topology, u, c=None, qdd_c=None,
 
     Q_ext = np.zeros_like(Q)
     # Motor torque on q1 = main vertical pole rotation
-    #Q_ext[1] = 1000.0     
-    Q_ext[1] = main_motor_torque(t_current, qd[1], motor_state)
+    Q_ext[1] = 0.0     
+    #Q_ext[1] = main_motor_torque(t_current, qd[1], motor_state)
 
     # Viscous damping in arm-pendulum hinges
     # damping torque: T_damp = -d * qd
-    Q_ext[4]  += -100.0   * qd[4]     # Pendule1
-    Q_ext[11] += -100.0   * qd[11]    # Pendule4
-    Q_ext[14] += -100.0   * qd[14]    # Pendule3
-    Q_ext[17] += -20000.0 * qd[17]    # Pendule2, rusted
+    if use_carousel_forces:
+        Q_ext[1] = main_motor_torque(t_current, qd[1], motor_state)
 
-    # Viscous damping in pendulum-nacelle Cardan joints
-    for idx in [5, 6, 12, 13, 15, 16, 18, 19]:
-        Q_ext[idx] += -6.0 * qd[idx]
+        Q_ext[4]  += -100.0   * qd[4]
+        Q_ext[11] += -100.0   * qd[11]
+        Q_ext[14] += -100.0   * qd[14]
+        Q_ext[17] += -20000.0 * qd[17]
+
+        for idx in [5, 6, 12, 13, 15, 16, 18, 19]:
+            Q_ext[idx] += -6.0 * qd[idx]
 
     # Linear spring-damper between arm and pendulum, via virtual work
     #Q_spring = compute_spring_damper_Q_virtual_work(q, qd, mbs_data, topology, u)
@@ -782,6 +639,8 @@ def compute_qdd_u(q, qd, mbs_data, topology, u, c=None, qdd_c=None,
         rhs = rhs - Muc @ qdd_c
 
     qdd_u = np.linalg.solve(Muu, rhs)
+    
+
     if np.max(np.abs(qdd_u)) > 1e4:
         print("\nWARNING: huge qdd_u")
         print("t =", t_current)
@@ -797,7 +656,47 @@ def compute_qdd_u(q, qd, mbs_data, topology, u, c=None, qdd_c=None,
     return qdd_u, Muu, Qu
 
 
+def diagnose_q1_mass_contributions(q, qd, mbs_data, topology, t_label=""):
+    """
+    Diagnostic: recompute Qu[1] while keeping only one body's mass/inertia active.
+    This identifies which body contributes most to Q1.
+    """
+    qdd_dummy = np.zeros_like(q)
 
+    M_full, Q_full = ner_generique(q, qd, qdd_dummy, mbs_data, topology)
+    print("\n--- Q1 mass contribution diagnostic", t_label, "---")
+    print("Full Qu[1] =", Q_full[1])
+
+    m_orig = topology["m"].copy()
+    I_orig = topology["I"].copy()
+    d_orig = topology["d_ii"].copy()
+
+    contributors = []
+
+    for i in range(1, mbs_data.njoint + 1):
+        if abs(m_orig[i]) < 1e-12 and np.linalg.norm(I_orig[i]) < 1e-12:
+            continue
+
+        topology["m"][:] = 0.0
+        topology["I"][:] = 0.0
+        topology["d_ii"][:] = 0.0
+
+        topology["m"][i] = m_orig[i]
+        topology["I"][i] = I_orig[i]
+        topology["d_ii"][i] = d_orig[i]
+
+        _, Q_i = ner_generique(q, qd, qdd_dummy, mbs_data, topology)
+
+        contributors.append((i, Q_i[1]))
+
+    topology["m"][:] = m_orig
+    topology["I"][:] = I_orig
+    topology["d_ii"][:] = d_orig
+
+    contributors.sort(key=lambda x: abs(x[1]), reverse=True)
+
+    for i, val in contributors:
+        print(f"body/joint q{i}: contribution to Q1 = {val}")
 
 
 def rhs_neri(t, y, mbs_data, topology, u, c=None, motor_state=None):
@@ -827,18 +726,20 @@ def rhs_neri(t, y, mbs_data, topology, u, c=None, motor_state=None):
 
     # Kommandierte Koordinaten aus der Aufgabenstellung einsetzen
     if c is not None and len(c) > 0:
-        qc, qdc, qddc = commanded_motion(t, c)
-        #qc = np.zeros(len(c))
-        #qdc = np.zeros(len(c))
-        #qddc = np.zeros(len(c))
+        #qc, qdc, qddc = commanded_motion(t, c)
+        qc = np.zeros(len(c))
+        qdc = np.zeros(len(c))
+        qddc = np.zeros(len(c))
 
         q[c] = qc
         qd[c] = qdc
     else:
         qddc = None
     # Beschleunigungen der unabhängigen Koordinaten berechnen
+    if 1.6995 < t < 1.7005:
+        diagnose_q1_mass_contributions(q, qd, mbs_data, topology, t_label=f"t={t}")
     qdd_u, _, _ = compute_qdd_u(q, qd, mbs_data, topology, u, c, qdd_c=qddc, 
-                                t_current=t, motor_state=motor_state)
+                                t_current=t, motor_state=motor_state, use_carousel_forces=True)
 
     yd = np.zeros_like(y)
 
@@ -968,14 +869,14 @@ def commanded_motion(t, c):
 
     return qc, qdc, qddc
 
-
+"""
 def main_motor_torque(t, qd1, motor_state):
-    """
-    Motor torque from assignment.
-    T = 1000 Nm until qd1 first reaches 0.8 rad/s.
-    Then T = 500 * (1 + cos(2*pi*(t - t0))) for 0.5 s.
-    Then T = 0.
-    """
+    
+    #Motor torque from assignment.
+    #T = 1000 Nm until qd1 first reaches 0.8 rad/s.
+    #Then T = 500 * (1 + cos(2*pi*(t - t0))) for 0.5 s.
+    #Then T = 0.
+    
 
     threshold = 0.8
 
@@ -997,474 +898,94 @@ def main_motor_torque(t, qd1, motor_state):
         return 500.0 * (1.0 + np.cos(2.0 * np.pi * (t - t0)))
 
     return 0.0
+"""
 
+def main_motor_torque(t, qd1, motor_state):
+    threshold = 0.8
 
-def spring_damper_debug_points(q, qd, mbs_data, topology):
-    """
-    Debug: berechnet die Punkte der vier Feder-Dämpfer-Elemente.
+    if motor_state is None:
+        torque = 1000.0
+        return torque
 
-    Noch keine Dynamikänderung.
-    Nur Geometrieprüfung.
-    """
-
-    omega, omega_c_dot, alpha_c, beta_c, z, O_M, A_M, R, R_abs, p_abs = forward_kinematics(
-        q, qd, topology, mbs_data
-    )
-
-    # Für jeden Subsystem-Zweig:
-    # arm_joint = Pendel-Hinge am Arm
-    # pend_joint = Cardan/Pendelende
-    #
-    # Punkt A am Arm: 0.5 m vom Mast weg entlang Armrichtung
-    # Punkt B am Pendel: 1.5 m unter Hinge und 0.1 m nach innen
-    #
-    # Erstmal nur grob für Geometrie.
-    data = []
-
-    branches = [
-        # name, hinge joint, cardan joint, inward direction in inertial frame at rest
-        ("pend1", 4, 5, np.array([-1.0, 0.0, 0.0])),
-        ("pend4", 11, 12, np.array([0.0, 1.0, 0.0])),
-        ("pend3", 14, 15, np.array([1.0, 0.0, 0.0])),
-        ("pend2", 17, 18, np.array([0.0, -1.0, 0.0])),
-    ]
-
-    for name, hinge, cardan, inward_global in branches:
-        # Arm attachment point:
-        # p_abs[hinge] liegt bei 1 m vom Mast. Feder hängt bei 0.5 m vom Mast.
-        # Also nehmen wir Mittelpunkt zwischen Mastachse-Höhe und Hinge.
-        p_hinge = p_abs[hinge].copy()
-
-        p_arm = p_hinge.copy()
-        p_arm[0:2] *= 0.5
-
-        # Pendulum attachment:
-        # 1.5 m unter Hinge entlang Pendelrichtung.
-        # Die Pendelrichtung approximieren wir als Richtung hinge -> cardan.
-        p_cardan = p_abs[cardan].copy()
-        pend_vec = p_cardan - p_hinge
-        L_pend = np.linalg.norm(pend_vec)
-
-        if L_pend < 1e-12:
-            e_pend = np.array([0.0, 0.0, -1.0])
+    if motor_state["t0_reach"] is None:
+        if qd1 < threshold:
+            torque = 1000.0
         else:
-            e_pend = pend_vec / L_pend
-
-        # Punkt 1.5 m unter dem Hinge
-        p_pend = p_hinge + 1.5 * e_pend
+            motor_state["t0_reach"] = t
+            print("\nMotor threshold reached")
+            print("t0_reach =", t)
+            print("qd1 =", qd1)
+            torque = 0.0
+    else:
+        torque = 0.0
+
+    # print only every ~0.1 s
+    if abs((t * 10) - round(t * 10)) < 1e-6:
+        print("motor debug: t =", round(t, 3), "qd1 =", qd1, "T =", torque)
+
+    return torque
+
+
+def define_cartpendulum_reference_topology(mbs_data):
+    N = mbs_data.njoint
+
+    joint_names = ["base"] + [None] * N
+
+    j_cart = mbs_data.joint_id["Cart_T2"]
+    j_pend = mbs_data.joint_id["Pendulum_R1"]
+
+    joint_names[j_cart] = "Cart_T2"
+    joint_names[j_pend] = "Pendulum_R1"
+
+    if N >= 3:
+        joint_names[3] = "Joint_2"
+
+    inbody = np.empty(N + 1, dtype=object)
+    phi = np.zeros((N + 1, 3))
+    psi = np.zeros((N + 1, 3))
+    d_hi = np.zeros((N + 1, 3))
+    m = np.zeros(N + 1)
+    d_ii = np.zeros((N + 1, 3))
+    I = np.zeros((N + 1, 3, 3))
+
+    inbody[0] = None
+
+    inbody[j_cart] = 0
+    psi[j_cart] = np.array([0.0, 1.0, 0.0])
+
+    inbody[j_pend] = j_cart
+    phi[j_pend] = np.array([1.0, 0.0, 0.0])
+    d_hi[j_pend] = np.zeros(3)
+
+    if N >= 3:
+        inbody[3] = j_pend
+        phi[3] = np.array([1.0, 0.0, 0.0])
+        d_hi[3] = np.zeros(3)
+        m[3] = 0.0
+        d_ii[3] = np.zeros(3)
+        I[3] = np.zeros((3, 3))
+
+    m_cart = mbs_data.m[mbs_data.body_id["Cart"]]
+    m_pend = mbs_data.m[mbs_data.body_id["Pendulum_Mass"]]
+
+    Lp_id = mbs_data.points_id["Pendulum_String"]["Lp"]
+    Lp = mbs_data.dpt[3, Lp_id]
+
+    m[j_cart] = m_cart
+    d_ii[j_cart] = np.zeros(3)
+
+    m[j_pend] = m_pend
+    d_ii[j_pend] = np.array([0.0, 0.0, -Lp / 2.0])
+    I[j_pend][0, 0] = m_pend * Lp**2 / 12.0
+
+    return {
+        "joint_names": joint_names,
+        "inbody": inbody,
+        "phi": phi,
+        "psi": psi,
+        "d_hi": d_hi,
+        "m": m,
+        "d_ii": d_ii,
+        "I": I,
+    }
 
-        # 0.1 m inward.
-        # Für Debug erstmal mit globaler inward Richtung.
-        p_pend = p_pend + 0.1 * inward_global
-
-        spring_vec = p_pend - p_arm
-        spring_len = np.linalg.norm(spring_vec)
-
-        data.append({
-            "name": name,
-            "p_arm": p_arm,
-            "p_pend": p_pend,
-            "length": spring_len,
-        })
-
-    return data
-
-def compute_spring_damper_Q(q, qd, mbs_data, topology):
-    """
-    Approximative generalized forces from the linear spring-damper elements
-    between arm and pendulum.
-
-    This version projects the force-induced moment onto the corresponding
-    arm-pendulum hinge coordinate:
-        q4, q11, q14, q17
-
-    It is not yet the full virtual-work treatment on all coordinates,
-    but it is the next useful step for stabilizing the pendulum motion.
-    """
-
-    k_spring = 500.0     # N/m
-    L0 = 10.0            # m
-    c_damp = 700.0       # Ns/m
-
-    N_body = mbs_data.njoint
-
-    Q_spring = np.zeros(N_body + 1)
-
-    # Current kinematics
-    omega, omega_c_dot, alpha_c, beta_c, z, O_M, A_M, R, R_abs, p_abs = forward_kinematics(
-        q, qd, topology, mbs_data
-    )
-
-    # Finite-difference kinematics for point velocities
-    eps = 1e-6
-    q_eps = q + eps * qd
-
-    omega_e, omega_c_dot_e, alpha_c_e, beta_c_e, z_e, O_M_e, A_M_e, R_e, R_abs_e, p_abs_e = forward_kinematics(
-        q_eps, qd, topology, mbs_data
-    )
-
-    phi = topology["phi"]
-
-    branches = [
-        # name, hinge joint, cardan joint, inward direction in global rest frame
-        ("pend1", 4, 5, np.array([-1.0, 0.0, 0.0])),
-        ("pend4", 11, 12, np.array([0.0, 1.0, 0.0])),
-        ("pend3", 14, 15, np.array([1.0, 0.0, 0.0])),
-        ("pend2", 17, 18, np.array([0.0, -1.0, 0.0])),
-    ]
-
-    for name, hinge, cardan, inward_global in branches:
-        # Current points
-        p_hinge = p_abs[hinge].copy()
-        p_cardan = p_abs[cardan].copy()
-
-        # Arm attachment:
-        # hinge is roughly 1 m from pole axis; spring attachment is 0.5 m from pole axis
-        p_arm = p_hinge.copy()
-        p_arm[0:2] *= 0.5
-
-        # Pendulum direction from hinge to cardan
-        pend_vec = p_cardan - p_hinge
-        L_pend = np.linalg.norm(pend_vec)
-
-        if L_pend < 1e-12:
-            e_pend = np.array([0.0, 0.0, -1.0])
-        else:
-            e_pend = pend_vec / L_pend
-
-        # Pendulum attachment:
-        # 1.5 m below hinge along pendulum, plus 0.1 m inward
-        p_pend = p_hinge + 1.5 * e_pend + 0.1 * inward_global
-
-        # Same points at q_eps for velocity approximation
-        p_hinge_e = p_abs_e[hinge].copy()
-        p_cardan_e = p_abs_e[cardan].copy()
-
-        p_arm_e = p_hinge_e.copy()
-        p_arm_e[0:2] *= 0.5
-
-        pend_vec_e = p_cardan_e - p_hinge_e
-        L_pend_e = np.linalg.norm(pend_vec_e)
-
-        if L_pend_e < 1e-12:
-            e_pend_e = np.array([0.0, 0.0, -1.0])
-        else:
-            e_pend_e = pend_vec_e / L_pend_e
-
-        p_pend_e = p_hinge_e + 1.5 * e_pend_e + 0.1 * inward_global
-
-        # Point velocities
-        v_arm = (p_arm_e - p_arm) / eps
-        v_pend = (p_pend_e - p_pend) / eps
-
-        # Spring vector from arm point to pendulum point
-        spring_vec = p_pend - p_arm
-        L = np.linalg.norm(spring_vec)
-
-        if L < 1e-12:
-            continue
-
-        e_spring = spring_vec / L
-
-        # Relative speed along spring
-        Ldot = np.dot(v_pend - v_arm, e_spring)
-
-        # Force applied on pendulum point
-        # F = - (k(L-L0) + c Ldot) e
-        F_pend = -(k_spring * (L - L0) + c_damp * Ldot) * e_spring
-
-        # Moment about pendulum hinge
-        r = p_pend - p_hinge
-        M_hinge_global = np.cross(r, F_pend)
-
-        # Project moment onto hinge axis
-        axis_global = R_abs[hinge] @ phi[hinge]
-        Q_spring[hinge] += np.dot(M_hinge_global, axis_global)
-
-    return Q_spring
-
-
-def spring_points(q, qd, mbs_data, topology):
-    """
-    Returns spring attachment points for all 4 arm-pendulum spring-damper elements.
-
-    For each branch:
-    p_arm  : attachment point on arm, 0.5 m from pole axis
-    p_pend : attachment point on pendulum, 1.5 m below hinge and 0.1 m inward
-    """
-
-    omega, omega_c_dot, alpha_c, beta_c, z, O_M, A_M, R, R_abs, p_abs = forward_kinematics(
-        q, qd, topology, mbs_data
-    )
-
-    branches = [
-        ("pend1", 4, 5),
-        ("pend4", 11, 12),
-        ("pend3", 14, 15),
-        ("pend2", 17, 18),
-    ]
-
-    points = []
-
-    for name, hinge, cardan in branches:
-        p_hinge = p_abs[hinge].copy()
-        p_cardan = p_abs[cardan].copy()
-
-        # Arm point: same height as hinge, halfway from pole axis to hinge.
-        r_xy = p_hinge[:2]
-        r_norm = np.linalg.norm(r_xy)
-
-        if r_norm < 1e-12:
-            inward = np.zeros(3)
-            p_arm = p_hinge.copy()
-        else:
-            radial = np.array([r_xy[0], r_xy[1], 0.0]) / r_norm
-            inward = -radial
-
-            p_arm = p_hinge.copy()
-            p_arm[:2] = 0.5 * radial[:2]
-
-        # Pendulum direction from hinge to cardan
-        pend_vec = p_cardan - p_hinge
-        L_pend = np.linalg.norm(pend_vec)
-
-        if L_pend < 1e-12:
-            e_pend = np.array([0.0, 0.0, -1.0])
-        else:
-            e_pend = pend_vec / L_pend
-
-        # Pendulum attachment:
-        # 1.5 m below hinge along pendulum axis + 0.1 m inward toward pole
-        p_pend = p_hinge + 1.5 * e_pend + 0.1 * inward
-
-        points.append({
-            "name": name,
-            "hinge": hinge,
-            "cardan": cardan,
-            "p_arm": p_arm,
-            "p_pend": p_pend,
-        })
-
-    return points
-
-
-def compute_spring_damper_Q_virtual_work(q, qd, mbs_data, topology, active_indices):
-    """
-    Correct spring-damper generalized forces using numerical virtual work.
-
-    Q_j = F_arm · dp_arm/dq_j + F_pend · dp_pend/dq_j
-
-    This is better than projecting a moment only on the pendulum hinge.
-    """
-
-    k_spring = 500.0
-    L0 = 10.0
-    c_damp = 700.0
-
-    N_body = mbs_data.njoint
-    Q_spring = np.zeros(N_body + 1)
-
-    eps = 1e-6
-
-    # Current points
-    points = spring_points(q, qd, mbs_data, topology)
-
-    # Points at q + eps*qd for velocity approximation
-    q_vel = q + eps * qd
-    points_vel = spring_points(q_vel, qd, mbs_data, topology)
-
-    # For each spring: compute physical forces
-    spring_forces = []
-
-    for p_now, p_vel in zip(points, points_vel):
-        p_arm = p_now["p_arm"]
-        p_pend = p_now["p_pend"]
-
-        p_arm_vel = p_vel["p_arm"]
-        p_pend_vel = p_vel["p_pend"]
-
-        v_arm = (p_arm_vel - p_arm) / eps
-        v_pend = (p_pend_vel - p_pend) / eps
-
-        d = p_pend - p_arm
-        L = np.linalg.norm(d)
-
-        if L < 1e-12:
-            F_pend = np.zeros(3)
-            F_arm = np.zeros(3)
-        else:
-            e = d / L
-            Ldot = np.dot(v_pend - v_arm, e)
-
-            # Force on pendulum point
-            F_pend = -(k_spring * (L - L0) + c_damp * Ldot) * e
-
-            # Equal and opposite force on arm point
-            F_arm = -F_pend
-
-        spring_forces.append({
-            "F_arm": F_arm,
-            "F_pend": F_pend,
-        })
-
-    # Numerical virtual work:
-    # perturb each active coordinate and recompute points
-    for j in active_indices:
-        q_plus = q.copy()
-        q_plus[j] += eps
-
-        points_plus = spring_points(q_plus, qd, mbs_data, topology)
-
-        Qj = 0.0
-
-        for p_now, p_plus, forces in zip(points, points_plus, spring_forces):
-            dp_arm_dq = (p_plus["p_arm"] - p_now["p_arm"]) / eps
-            dp_pend_dq = (p_plus["p_pend"] - p_now["p_pend"]) / eps
-
-            Qj += np.dot(forces["F_arm"], dp_arm_dq)
-            Qj += np.dot(forces["F_pend"], dp_pend_dq)
-
-        Q_spring[j] = Qj
-
-    return Q_spring
-
-
-def compute_spring_damper_cartesian_forces(q, qd, mbs_data, topology):
-    """
-    Spring-damper elements as Cartesian external forces.
-
-    Correct assignment values:
-    k = 500 N/m
-    L0 = 10 m
-    c = 700 Ns/m
-    """
-
-    k_spring = 500.0
-    L0 = 10.0
-    c_damp = 700.0
-
-    N_body = mbs_data.njoint
-
-    F_ext = np.zeros((N_body + 1, 3))
-    L_ext = np.zeros((N_body + 1, 3))
-
-    omega, omega_c_dot, alpha_c, beta_c, z, O_M, A_M, R, R_abs, p_abs = forward_kinematics(
-        q, qd, topology, mbs_data
-    )
-
-    d_ii = topology["d_ii"]
-    inbody = topology["inbody"]
-
-    # velocities by finite difference
-    eps = 1e-6
-    q_eps = q + eps * qd
-
-    _, _, _, _, _, _, _, _, R_abs_eps, p_abs_eps = forward_kinematics(
-        q_eps, qd, topology, mbs_data
-    )
-
-    branches = [
-        # name, pendulum body / hinge joint, cardan/end joint
-        ("pend1", 4, 5),
-        ("pend4", 11, 12),
-        ("pend3", 14, 15),
-        ("pend2", 17, 18),
-    ]
-
-    for name, pend_body, cardan_body in branches:
-        arm_body = int(inbody[pend_body])
-
-        # current hinge / cardan positions
-        p_hinge = p_abs[pend_body].copy()
-        p_cardan = p_abs[cardan_body].copy()
-
-        # arm attachment: 0.5 m from pole axis, same direction as hinge
-        r_xy = p_hinge[:2]
-        r_norm = np.linalg.norm(r_xy)
-
-        if r_norm < 1e-12:
-            radial = np.zeros(3)
-            inward = np.zeros(3)
-            p_arm = p_hinge.copy()
-        else:
-            radial = np.array([r_xy[0], r_xy[1], 0.0]) / r_norm
-            inward = -radial
-
-            p_arm = p_hinge.copy()
-            p_arm[:2] = 0.5 * radial[:2]
-
-        # pendulum attachment: 1.5 m below hinge along pendulum axis + 0.1 m inward
-        pend_vec = p_cardan - p_hinge
-        L_pend = np.linalg.norm(pend_vec)
-
-        if L_pend < 1e-12:
-            e_pend = np.array([0.0, 0.0, -1.0])
-        else:
-            e_pend = pend_vec / L_pend
-
-        p_pend = p_hinge + 1.5 * e_pend + 0.1 * inward
-
-        # same points at q + eps*qd for velocity
-        p_hinge_eps = p_abs_eps[pend_body].copy()
-        p_cardan_eps = p_abs_eps[cardan_body].copy()
-
-        r_xy_eps = p_hinge_eps[:2]
-        r_norm_eps = np.linalg.norm(r_xy_eps)
-
-        if r_norm_eps < 1e-12:
-            radial_eps = np.zeros(3)
-            inward_eps = np.zeros(3)
-            p_arm_eps = p_hinge_eps.copy()
-        else:
-            radial_eps = np.array([r_xy_eps[0], r_xy_eps[1], 0.0]) / r_norm_eps
-            inward_eps = -radial_eps
-
-            p_arm_eps = p_hinge_eps.copy()
-            p_arm_eps[:2] = 0.5 * radial_eps[:2]
-
-        pend_vec_eps = p_cardan_eps - p_hinge_eps
-        L_pend_eps = np.linalg.norm(pend_vec_eps)
-
-        if L_pend_eps < 1e-12:
-            e_pend_eps = np.array([0.0, 0.0, -1.0])
-        else:
-            e_pend_eps = pend_vec_eps / L_pend_eps
-
-        p_pend_eps = p_hinge_eps + 1.5 * e_pend_eps + 0.1 * inward_eps
-
-        v_arm = (p_arm_eps - p_arm) / eps
-        v_pend = (p_pend_eps - p_pend) / eps
-
-        # spring force
-        d = p_pend - p_arm
-        L = np.linalg.norm(d)
-
-        if L < 1e-12:
-            continue
-
-        e = d / L
-        Ldot = np.dot(v_pend - v_arm, e)
-
-        # force on pendulum point
-        F_pend_global = -(k_spring * (L - L0) + c_damp * Ldot) * e
-
-        # opposite force on arm point
-        F_arm_global = -F_pend_global
-
-        # helper: apply point force to body as force + moment about COM
-        def apply_point_force(body, p_point_global, F_global):
-            p_com_global = p_abs[body] + R_abs[body] @ d_ii[body]
-
-            M_global = np.cross(p_point_global - p_com_global, F_global)
-
-            # transform global force/moment into body frame
-            F_local = R_abs[body].T @ F_global
-            M_local = R_abs[body].T @ M_global
-
-            F_ext[body] += F_local
-            L_ext[body] += M_local
-
-        apply_point_force(pend_body, p_pend, F_pend_global)
-        apply_point_force(arm_body, p_arm, F_arm_global)
-
-    return F_ext, L_ext

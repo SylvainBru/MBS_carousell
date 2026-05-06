@@ -46,7 +46,8 @@ mbs_path = os.path.join(script_dir, '..', 'dataR', 'Merry_go_round.mbs')
 
 
 mbs_data = Robotran.MbsData(mbs_path)
-topology = neri.define_topology_from_mbs(mbs_path)
+topology = neri.define_topology()
+neri.validate_topology(topology, "manual carousel")
 print("Simulation started")
 
 # Partitioning
@@ -65,7 +66,7 @@ y0 = np.concatenate((q0[u], qd0[u]))
 
 
 t0 = 0.0
-tf = 0.5
+tf = 2.0
 dt = 2e-3
 
 motor_state = {"t0_reach": None}
