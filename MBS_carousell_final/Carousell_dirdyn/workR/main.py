@@ -76,6 +76,18 @@ joint_pend4 = mbs_data.joint_id['arm_pend4']
 joint_r1    = mbs_data.joint_id['R1_Pole']
 joint_r2    = mbs_data.joint_id['R2_Pole']
 
+#Driven variable 
+joint_R1_pole = mbs_data.joint_id['R1_Pole']
+joint_R2_pole = mbs_data.joint_id['R2_Pole']
+
+joint_R2_arm_pend2 = mbs_data.joint_id['R2_arm_pend2']
+
+joint_T1_effort_normal = mbs_data.joint_id['T1_effort_normal']
+joint_T3_effort_tranchant = mbs_data.joint_id['T3_effort_tranchant']
+joint_R2_effort_flechissant = mbs_data.joint_id['R2_effort_flechissant']
+
+
+
 time = results.qd[:, 0]
 
 _plot_dir = os.path.join(script_dir, "dirdyn_plot")
@@ -139,5 +151,19 @@ axis.set_title('Driven joint angles (pole tilt)')
 axis.legend()
 fig.tight_layout()
 save(fig, "04_driven_joints")
+
+#Plot 5 Effort
+
+fig, axis = plt.subplots(figsize=(9, 5))
+axis.plot(time, results.Qc[:, joint_T1_effort_normal], label='Effort_normal')
+axis.plot(time, results.Qc[:, joint_T3_effort_tranchant], label='Effort_tranchant')
+axis.grid(True)
+axis.set_xlim(t0, tf)
+axis.set_xlabel('Time (s)')
+axis.set_ylabel('Force [N]')
+axis.set_title('Effort interne')
+axis.legend()
+fig.tight_layout()
+save(fig, "05_effort_interne")
 
 plt.show()
