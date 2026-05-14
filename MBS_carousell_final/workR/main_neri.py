@@ -25,7 +25,7 @@ inbody = np.array(
     [None, 0, 1, 2, 3, 4, 5, 3, 7, 8, 9, 10, 11, 12, 3, 14, 15, 3, 17, 18],
     dtype=object)
 
-fi_arr = np.array([
+phi_arr = np.array([
     [0,0,0],  # 0
     [0,0,1],  # 1  R3_Pole
     [1,0,0],  # 2  R1_Pole  (commandé)
@@ -106,7 +106,7 @@ for _bname, _ji in _body_to_joint.items():
 # Dictionnaire topologie pour neri.py 
 topology = {
     "inbody": inbody,
-    "phi":    fi_arr,
+    "phi":    phi_arr,
     "psi":    psi_arr,
     "d_hi":   d_hi,
     "m":      m_arr,
@@ -221,7 +221,7 @@ if __name__ == "__main__":
 
     u_idx = np.array(mbs_data.qu[1:mbs_data.nqu + 1], dtype=int)
     c_idx = np.array(mbs_data.qc[1:mbs_data.nqc + 1], dtype=int)
-    print("u (libres)    =", u_idx)
+    print("u (indépendants)    =", u_idx)
     print("c (commandés) =", c_idx)
 
     # Conditions initiales depuis le .mbs
@@ -341,6 +341,6 @@ if __name__ == "__main__":
     ax.grid(True)
     ax.legend()
     fig.tight_layout()
-    save(fig, "04_driven_joints")
+    save(fig, "05_driven_joints")
 
     plt.show()
