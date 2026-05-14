@@ -1,9 +1,3 @@
-"""
-NERi simulation du Merry-go-round — style Thibaut.
-Utilise neri.forward_kinematics + neri.backward_dynamics (neri.py du même dossier).
-Topologie, forces et conditions initiales identiques à main_nicolas_style.py.
-"""
-
 import os
 import numpy as np
 import MBsysPy as Robotran
@@ -282,6 +276,10 @@ if __name__ == "__main__":
     print(f"\nVitesse finale pôle : {qd1_deg[-1]:.2f} deg/s")
     print(f"Motor t0_reach      : {motor_state['t0']}")
 
+    _comp_dir = os.path.join(_script_dir, '..', 'comparaison_neri_vs_dirdyn')
+    os.makedirs(_comp_dir, exist_ok=True)
+    np.save(os.path.join(_comp_dir, 'neri_results.npy'), np.column_stack((time, qd1_deg)))
+
     q2_t = np.array([driven_kinematics(t)[2][0] for t in time])
     q3_t = np.array([driven_kinematics(t)[3][0] for t in time])
 
@@ -297,9 +295,9 @@ if __name__ == "__main__":
     ax.plot(time, qd1_deg, label='Main pole angular velocity')
     ax.set_xlabel('Time [s]')
     ax.set_ylabel('Angular velocity [deg/s]')
-    ax.set_title('Angular velocity around the vertical axis of the main pole')
     ax.grid(True)
     ax.legend()
+    fig.suptitle('NERi')
     fig.tight_layout()
     save(fig, "01_pole_velocity")
 
@@ -311,9 +309,9 @@ if __name__ == "__main__":
     ax.plot(time, np.rad2deg(jq(11)), label='Pendule 4')
     ax.set_xlabel('Time [s]')
     ax.set_ylabel('Angle [deg]')
-    ax.set_title('Pendulum angles')
     ax.grid(True)
     ax.legend()
+    fig.suptitle('NERi')
     fig.tight_layout()
     save(fig, "02_pendulum_angles")
 
@@ -325,9 +323,9 @@ if __name__ == "__main__":
     ax.plot(time, np.rad2deg(jqd(11)), label='Pendule 4')
     ax.set_xlabel('Time [s]')
     ax.set_ylabel('Angular velocity [deg/s]')
-    ax.set_title('Pendulum angular velocities')
     ax.grid(True)
     ax.legend()
+    fig.suptitle('NERi')
     fig.tight_layout()
     save(fig, "03_pendulum_velocities")
 
@@ -337,9 +335,9 @@ if __name__ == "__main__":
     ax.plot(time, np.rad2deg(q3_t), label='q3 — R2_Pole')
     ax.set_xlabel('Time [s]')
     ax.set_ylabel('Angle [deg]')
-    ax.set_title('Driven joint angles (pole tilt)')
     ax.grid(True)
     ax.legend()
+    fig.suptitle('NERi')
     fig.tight_layout()
     save(fig, "04_driven_joints")
 
